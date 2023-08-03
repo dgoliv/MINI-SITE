@@ -1,375 +1,409 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Tarefas</title>
+  <title>Lista de Compras</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
+    /* Estilos CSS para o formulário e a lista de compras */
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
       padding: 20px;
     }
 
-    h1 {
-      text-align: center;
+    .form-group {
+      margin-bottom: 10px;
     }
 
-    .task-list {
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    /* Estilos para os botões Editar e Excluir */
+.shopping-list-item button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.shopping-list-item button.edit-button {
+  background-color: #007BFF;
+  margin-right: 5px;
+}
+
+.shopping-list-item button.delete-button {
+  background-color: #DC3545;
+}
+
+
+
+    /* Estilos para a lista de compras */
+    h2 {
+    border: none solid #dddddd;
+    text-align: center;
+    padding: 1px;
+
+    }
+     
+    
+    
+    .shopping-list {
+      
+      list-style-type: none;
+      padding: 0;
+   
+      margin-top: 1px;
+      
+    }
+    .shopping-list {
       list-style-type: none;
       padding: 0;
     }
 
-    .task-list li {
+    .shopping-list  {
       margin-bottom: 10px;
     }
 
-    .task-item {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between; /* Adicionado para espaçamento entre os elementos */
-      align-items: flex-start;
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 5px;
-    }
 
-    .task-item .title {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .task-item .subtitle {
-      white-space: pre-line;
-      color: #888;
-      font-size: 0.8em;
-    }
-
-    .task-item .date {
-      font-weight: bold;
-      margin-top: 5px;
-    }
-
-    .task-item .edit-button {
-      background-color: #4B80D6;
-      color: white;
-      border: none;
-      cursor: pointer;
-      padding: 10px;
-      border-radius: 5px;
-      margin-right: 5px;
-    }
-    
-    .task-item .delete-button {
-      background-color: #DC334C;
-      color: white;
-      border: none;
-      cursor: pointer;
-      padding: 10px;
-      border-radius: 5px;
-      margin-right: 5px;
-    }
-
-    .task-item .edit-button:hover,
-    {
-      opacity: 0.8;
-    }
-
-    .add-task-form {
-      display: flex;
-      flex-direction: column;
-      margin-top: 20px;
-    }
-
-    .add-task-form input,
-    .add-task-form select,
-    .add-task-form textarea,
-    .add-task-form button {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+   
+    .shopping-list-item label {
       margin-bottom: 10px;
     }
 
-    .add-task-form button {
-      background-color: #4B80D6;
+    .shopping-list-item span {
+      margin-bottom: 2px;
+      
+    }
+    .shopping-list button  {
+      width: 100px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4CAF50;
       color: white;
       border: none;
       cursor: pointer;
+      margin-right: 5px;
+      border-radius: 3px;
+    }
+
+    
+   .shopping-list-item button  {
+      width: 100px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+    #shopping-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#shopping-list-table th,
+#shopping-list-table td {
+  text-align: center;
+  top:1px;
+  padding: 8px;
+  vertical-align: top;
+  
+}
+
+#shopping-list-table th {
+  background-color: #4CAF50;
+  color: white;
+  
+}
+
+
+
+#shopping-list-table button {
+  margin-right: 5px;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+
+
     }
     
-    .delete-button {
-     background-color: #dc3545;
-     color: white;
-    }
-
-    .delete-button:hover {
-    background-color: #c82333;
-    }
-
-    .add-task-form button:hover {
-      background-color: #4B80D6;
-    }
     
 
-    input[type="range"] {
-      width: 150px;
-      margin: 10px 0;
-    }
-
-    label {
-      margin-left: 10px;
-    }
-
-    #slider-value {
-      margin-left: 5px;
-      font-weight: bold;
+    /* Estilos CSS para mensagens */
+    .form-messages {
+      margin-top: 10px;
+      color: red;
+      text-align: center;
+      
     }
   </style>
 </head>
 <body>
-  <h1>Lista de Tarefas</h1>
+  <div class="shopping-list">
+    <h2>Lista de Compras</h2>
+    <form id="shopping-form">
+      <div class="form-group">
+        <label for="fornecedor">Fornecedor</label>
+        <input type="text" id="fornecedor" name="fornecedor" required>
+      </div>
+      <div class="form-group">
+        <label for="vendedor">Vendedor</label>
+        <input type="text" id="vendedor" name="vendedor" required>
+      </div>
+         <div class="form-group">
+        <label for="produtos">Produtos</label>
+        <textarea id="produtos" name="produtos" required></textarea>
+        </div>
 
-  <form class="add-task-form">
-    <div>
-      <input type="text" id="new-title-input" placeholder="Novo Fornecedor">
-      <button type="button" onclick="addNewTitle()">Adicionar</button>
-    </div>
-    <select id="title-select">
-      <option value="">Selecione um título</option>
-      <!-- As opções serão adicionadas dinamicamente -->
-    </select>
-    <textarea id="subtitle-input" placeholder="Descrição dos Produtos" rows="5"></textarea>
-    <input type="date" id="date-input">
-    <select id="filtered-title-select" onchange="filterByTitle()">
-      <option value="">Filtrar por título</option>
-      <!-- As opções serão adicionadas dinamicamente -->
-    </select>
-    <button type="button" onclick="addTask()">Adicionar</button>
-  </form>
- <div>
-  <label for="status-radio">Status:</label>
-  <input type="radio" name="status" value="received" onchange="filterByStatus(true)" checked>Recebidas
-  <input type="radio" name="status" value="not-received" onchange="filterByStatus(false)">Não Recebidas
+      <div class="form-group">
+        <label for="data">Data da Compra</label>
+        <input type="date" id="data" name="data" required>
+      </div>
+      <div class="form-group">
+        <button type="submit">Adicionar</button>
+      </div>
+    </form>
+
+    <!-- Substitua a seção da tabela no HTML -->
+<div class="shopping-list">
+    <h2>Lista de Compras</h2>
+     <table id="shopping-list-table">
+         
+        <thead>
+            <tr>
+                <th>Fornecedor</th>
+                <th>Vendedor</th>
+                <th>Produtos</th>
+                <th>Data da Compra</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="shopping-list-tbody"></tbody>
+    </table>
 </div>
 
+    <div class="form-messages" id="form-messages"></div>
+  </div>
+  <!-- Adicione este link ao head para incluir os ícones do Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-2OG7IQb5LQSj+64I4Ifrqz9X3qWhgJgzvoUUg6bIyIiYpLZC2mh1I5i/r8i63tFna3x6MkFjuqalnKlQMqlLg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <ul class="task-list"></ul>
-  
 
+  <!-- Configurações do Firebase e Firestore -->
+  <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js"></script>
   <script>
-    // Array de tarefas
-    const tasks = [];
+    // Configurações do seu projeto no Firebase
+    var firebaseConfig = {
+      apiKey: "AIzaSyC-AZzKXWy6_mvNcF8QZWuusTjpo6Dj2Hw",
+      authDomain: "projetoweb-6232c.firebaseapp.com",
+      databaseURL: "https://projetoweb-6232c.firebaseio.com",
+      projectId: "projetoweb-6232c",
+      storageBucket: "projetoweb-6232c.appspot.com",
+      messagingSenderId: "341899111399",
+      appId: "1:341899111399:web:3c5edd575a96808c786b42"
+    };
 
-    // Array de títulos
-    const titles = [];
+    // Inicializa o app do Firebase
+    firebase.initializeApp(firebaseConfig);
 
-    // Função para adicionar um novo título à lista suspensa
-    function addNewTitle() {
-      const newTitleInput = document.getElementById('new-title-input');
-      const newTitle = newTitleInput.value.trim();
+    // Inicializa o Firestore
+    var db = firebase.firestore();
 
-      if (newTitle !== '') {
-        titles.push(newTitle);
+    // Referências aos elementos do formulário
+    var form = document.getElementById("shopping-form");
+    var fornecedorInput = document.getElementById("fornecedor");
+    var vendedorInput = document.getElementById("vendedor");
+    var produtosInput = document.getElementById("produtos");
+    var dataInput = document.getElementById("data");
+    var shoppingList = document.getElementById("shopping-list-ul");
 
-        // Atualiza a lista suspensa de títulos
-        renderTitleOptions();
-        renderFilteredTitleOptions();
+    // Variável para armazenar o ID da compra sendo editada (inicialmente nulo)
+    var compraEditId = null;
 
-        newTitleInput.value = '';
+    // Função para formatar a data no formato dd/mm/aaaa
+    function formatarData(data) {
+      var dataObj = new Date(data);
+      var dia = (dataObj.getDate() + 1).toString().padStart(2, '0');
+      var mes = (dataObj.getMonth() + 1).toString().padStart(2, '0');
+      var ano = dataObj.getFullYear();
+      return dia + '/' + mes + '/' + ano;
+    }
+
+    // Função para editar uma compra existente
+    function editCompra(compraId, data) {
+      fornecedorInput.value = data.fornecedor;
+      vendedorInput.value = data.vendedor;
+      produtosInput.value = data.produtos;
+      dataInput.value = data.data;
+
+      // Define o ID da compra sendo editada
+      compraEditId = compraId;
+
+      // Altera o texto do botão "Adicionar" para "Atualizar"
+      var addButton = document.querySelector("#shopping-form button[type='submit']");
+      addButton.innerText = "Atualizar";
+
+      // Remove o evento anterior do botão "Adicionar" (para adicionar novas compras)
+      form.removeEventListener("submit", addHandler);
+
+      // Cria um novo evento para o botão "Atualizar"
+      form.addEventListener("submit", updateHandler);
+    }
+
+    // Função para atualizar uma compra existente
+    function updateHandler(event) {
+      event.preventDefault(); // Evita o comportamento padrão do formulário
+
+      var fornecedor = fornecedorInput.value;
+      var vendedor = vendedorInput.value;
+      var produtos = produtosInput.value;
+      var data = dataInput.value;
+
+      // Verifica se está editando ou adicionando
+      if (compraEditId) {
+        // Atualiza a compra no Firestore
+        db.collection("compras").doc(compraEditId).update({
+          fornecedor: fornecedor,
+          vendedor: vendedor,
+          produtos: produtos,
+          data: data
+        })
+        .then(function() {
+          // Limpa os campos do formulário após a atualização
+          form.reset();
+
+          // Exibe uma mensagem de sucesso
+          document.getElementById("form-messages").innerHTML = "Compra atualizada com sucesso!";
+
+          // Volta a função do botão para "Adicionar"
+          compraEditId = null;
+          var addButton = document.querySelector("#shopping-form button[type='submit']");
+          addButton.innerText = "Adicionar";
+          form.removeEventListener("submit", updateHandler);
+          form.addEventListener("submit", addHandler);
+
+          // Recarrega a lista de compras após a atualização
+          loadShoppingList();
+        })
+        .catch(function(error) {
+          // Exibe uma mensagem de erro, se ocorrer algum problema
+          document.getElementById("form-messages").innerHTML = "Erro ao atualizar compra: " + error;
+        });
       }
     }
 
-    // Função para renderizar as opções da lista suspensa de títulos
-    function renderTitleOptions() {
-      const titleSelect = document.getElementById('title-select');
-      titleSelect.innerHTML = '';
+    // Função para adicionar novas compras
+    function addHandler(event) {
+      event.preventDefault(); // Evita o comportamento padrão do formulário
 
-      const defaultOption = document.createElement('option');
-      defaultOption.value = '';
-      defaultOption.textContent = 'Fornecedores';
-      titleSelect.appendChild(defaultOption);
+      var fornecedor = fornecedorInput.value;
+      var vendedor = vendedorInput.value;
+      var produtos = produtosInput.value;
+      var data = dataInput.value;
 
-      titles.forEach(title => {
-        const option = document.createElement('option');
-        option.value = title;
-        option.textContent = title;
-        titleSelect.appendChild(option);
+      // Adiciona uma nova compra no Firestore
+      db.collection("compras").add({
+        fornecedor: fornecedor,
+        vendedor: vendedor,
+        produtos: produtos,
+        data: data
+      })
+      .then(function(docRef) {
+        // Limpa os campos do formulário após o cadastro
+        form.reset();
+
+        // Exibe uma mensagem de sucesso
+        document.getElementById("form-messages").innerHTML = "Compra adicionada com sucesso!";
+      })
+      .catch(function(error) {
+        // Exibe uma mensagem de erro, se ocorrer algum problema
+        document.getElementById("form-messages").innerHTML = "Erro ao adicionar compra: " + error;
       });
     }
+        
+    // Função para carregar a lista de compras
+function loadShoppingList() {
+  db.collection("compras").onSnapshot(function (querySnapshot) {
+    const shoppingListTable = document.getElementById("shopping-list-tbody");
+    shoppingListTable.innerHTML = ""; // Limpa a tabela antes de atualizá-la
 
-    // Função para renderizar as opções da lista suspensa de títulos filtrados
-    function renderFilteredTitleOptions() {
-      const filteredTitleSelect = document.getElementById('filtered-title-select');
-      filteredTitleSelect.innerHTML = '';
+    querySnapshot.forEach(function (doc) {
+      var data = doc.data();
 
-      const defaultOption = document.createElement('option');
-      defaultOption.value = '';
-      defaultOption.textContent = 'Filtrar por Fornecedor';
-      filteredTitleSelect.appendChild(defaultOption);
+      var row = document.createElement("tr");
+      row.className = "shopping-list-item";
 
-      titles.forEach(title => {
-        const option = document.createElement('option');
-        option.value = title;
-        option.textContent = title;
-        filteredTitleSelect.appendChild(option);
+      var fornecedorCell = document.createElement("td");
+      fornecedorCell.innerText = data.fornecedor;
+
+      var vendedorCell = document.createElement("td");
+      vendedorCell.innerText = data.vendedor;
+
+      var produtosCell = document.createElement("td");
+      produtosCell.innerHTML = data.produtos.replace(/\n/g, "<br>");
+
+      var dataCell = document.createElement("td");
+      dataCell.innerText = formatarData(data.data);
+
+      var actionsCell = document.createElement("td");
+      var deleteButton = document.createElement("button");
+deleteButton.innerText = "Excluir";
+deleteButton.classList.add("delete-button"); // Adiciona a classe "delete-button" ao botão
+deleteButton.addEventListener("click", function () {
+  // Exclui a compra do Firestore
+  db.collection("compras")
+    .doc(doc.id)
+    .delete()
+    .then(function () {
+      // Exibe uma mensagem de sucesso
+      document.getElementById("form-messages").innerHTML = "Compra excluída com sucesso!";
+    })
+    .catch(function (error) {
+      // Exibe uma mensagem de erro, se ocorrer algum problema
+      document.getElementById("form-messages").innerHTML = "Erro ao excluir compra: " + error;
+    });
+});
+
+
+      var editButton = document.createElement("button");
+      editButton.innerText = "Editar";
+      editButton.addEventListener("click", function () {
+        // Edita a compra
+        editCompra(doc.id, data);
       });
-    }
 
-    // Função para adicionar uma tarefa
-    function addTask() {
-      const titleSelect = document.getElementById('title-select');
-      const subtitleInput = document.getElementById('subtitle-input');
-      const dateInput = document.getElementById('date-input');
+      actionsCell.appendChild(editButton);
+      actionsCell.appendChild(deleteButton);
+      
 
-      const title = titleSelect.value.trim();
-      const subtitle = subtitleInput.value.trim();
-      const date = dateInput.value;
-
-      if (title !== '') {
-        const task = {
-          title: title,
-          subtitle: subtitle,
-          date: date,
-          completed: false
-        };
-
-        tasks.push(task);
-
-        renderTasks();
-        subtitleInput.value = '';
-        dateInput.value = '';
-      }
-    }
-
-    // Função para renderizar as tarefas
-    function renderTasks() {
-      const taskList = document.querySelector('.task-list');
-      taskList.innerHTML = '';
-
-      const filteredTitleSelect = document.getElementById('filtered-title-select');
-      const filteredTitle = filteredTitleSelect.value.trim();
-
-      tasks.forEach((task, index) => {
-        if (filteredTitle === '' || task.title === filteredTitle) {
-          const li = document.createElement('li');
-          const taskItem = document.createElement('div');
-          const checkbox = document.createElement('input');
-          const titleSpan = document.createElement('span');
-          const subtitleDiv = document.createElement('div');
-          const dateDiv = document.createElement('div');
-          const buttonContainer = document.createElement('div');
-          const editButton = document.createElement('button');
-          const deleteButton = document.createElement('button');
-
-          checkbox.type = 'checkbox';
-          checkbox.checked = task.completed;
-          checkbox.addEventListener('change', () => {
-            // Marcar/desmarcar a tarefa como concluída
-            task.completed = checkbox.checked;
-          });
-
-          titleSpan.classList.add('title');
-          titleSpan.textContent = task.title;
-
-          subtitleDiv.classList.add('subtitle');
-          subtitleDiv.textContent = task.subtitle;
-
-          dateDiv.classList.add('date');
-          dateDiv.textContent = formatDate(task.date);
-
-          editButton.classList.add('add-task-button');
-          editButton.classList.add('edit-button');
-          editButton.textContent = 'Editar';
-          editButton.addEventListener('click', () => {
-            // Implemente a lógica para editar a tarefa
-            editTask(index);
-          });
-
-          deleteButton.classList.add('add-task-button');
-          deleteButton.classList.add('delete-button');
-          deleteButton.textContent = 'Excluir';
-          deleteButton.addEventListener('click', () => {
-            // Implemente a lógica para excluir a tarefa
-            deleteTask(index);
-          });
-
-          taskItem.classList.add('task-item');
-          buttonContainer.classList.add('button-container');
-          buttonContainer.appendChild(editButton);
-          buttonContainer.appendChild(deleteButton);
-
-          taskItem.appendChild(checkbox);
-          taskItem.appendChild(titleSpan);
-          taskItem.appendChild(subtitleDiv);
-          taskItem.appendChild(dateDiv);
-          taskItem.appendChild(buttonContainer);
-
-          li.appendChild(taskItem);
-          taskList.appendChild(li);
-        }
-      });
-    }
-
-    // Função para formatar a data no formato dd-mm-yyyy
-    function formatDate(dateString) {
-      const date = new Date(dateString);
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const year = date.getFullYear();
-
-      return `${day}-${month}-${year}`;
-    }
-
-    // Função para editar uma tarefa
-    function editTask(index) {
-      const task = tasks[index];
-
-      const titleSelect = document.getElementById('title-select');
-      const subtitleInput = document.getElementById('subtitle-input');
-      const dateInput = document.getElementById('date-input');
-
-      titleSelect.value = task.title;
-      subtitleInput.value = task.subtitle;
-      dateInput.value = task.date;
-
-      deleteTask(index);
-    }
-
-    // Função para excluir uma tarefa
-    function deleteTask(index) {
-      tasks.splice(index, 1);
-      renderTasks();
-    }
-
-    // Renderiza as opções da lista suspensa de títulos ao carregar a página
-    renderTitleOptions();
-    renderFilteredTitleOptions();
-
-    // Função para filtrar as tarefas com base no slider
-    function filterByStatus(status) {
-  const taskList = document.querySelector('.task-list');
-  const checkboxes = taskList.querySelectorAll('input[type="checkbox"]');
-
-  checkboxes.forEach(checkbox => {
-    const taskItem = checkbox.closest('.task-item');
-    const taskStatus = checkbox.checked;
-
-    if ((status && taskStatus) || (!status && !taskStatus)) {
-      taskItem.style.display = 'flex';
-    } else {
-      taskItem.style.display = 'none';
-    }
+      row.appendChild(fornecedorCell);
+      row.appendChild(vendedorCell);
+      row.appendChild(produtosCell);
+      row.appendChild(dataCell);
+      row.appendChild(actionsCell);
+      shoppingListTable.appendChild(row);
+    });
   });
 }
 
-    // Função para filtrar as tarefas por título
-    function filterByTitle() {
-      const filteredTitleSelect = document.getElementById('filtered-title-select');
-      const filteredTitle = filteredTitleSelect.value.trim();
 
-      renderTasks();
-    }
+    // Manipula o envio do formulário (para adicionar novas compras)
+    form.addEventListener("submit", addHandler);
+
+    // Chama a função para carregar a lista de compras
+    loadShoppingList();
+
   </script>
 </body>
 </html>
