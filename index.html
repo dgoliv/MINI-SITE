@@ -4,219 +4,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contas à Pagar</title>
-
-    <!-- Adicione o link para o Bootstrap CSS -->
+    <title>CRUD de Contas a Pagar</title>
+    <!-- Adicione os links para o Firebase e o Bootstrap CSS -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Seu estilo CSS personalizado aqui -->
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        th {
-            text-align: center;
-        }
-
-        /* Estilos CSS para o formulário e a lista de contas a pagar */
-        .form-group {
-            margin-bottom: 10px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 5px;
-            font-size: 14px;
-        }
-
-        /* Estilos para os botões Editar e Excluir */
-        .shopping-list-item button.edit-button {
-            background-color: #007BFF;
-            margin-right: 1px;
-        }
-
-        .shopping-list-item button.delete-button {
-            background-color: #DC3545;
-            margin-right: 1px;
-        }
-
-        /* Estilos para a lista de contas a pagar */
-        h2 {
-            border: none solid #dddddd;
-            text-align: center;
-            padding: 1px;
-        }
-
-        #shopping-list-table th,
-        #shopping-list-table td {
-            text-align: center;
-            top: 1px;
-            padding: 5px;
-            vertical-align: top;
-            white-space: nowrap; /* Impede a quebra de linha dentro das células */
-        }
-
-        .shopping-list-item td {
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .text-truncate td {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .shopping-list button {
-            width: 100px;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin-right: 5px;
-            border-radius: 3px;
-        }
-
-        .shopping-list-item button {
-            width: 45px;
-            padding: 1px;
-            font-size: 14px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin-right: 7px;
-        }
-
-        /* Estilos CSS para mensagens */
-        .form-messages {
-            margin-top: 10px;
-            color: red;
-            text-align: center;
-        }
-
-        /* Novos estilos para os filtros */
-        .filters-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 10px;
-        }
-
-        .filter-label {
-            margin-right: 10px;
-        }
-
-        .filter-input {
-            width: 200px;
-            padding: 5px;
-            font-size: 16px;
-        }
-
-        .filter-buttons {
-            display: flex;
-        }
-
-        .filter-buttons button {
-            width: 100px;
-            margin-left: 5px;
-        }
+        /* Seu estilo CSS aqui */
+        
+       
+        
     </style>
 </head>
 
 <body>
-    <div class="container-fluid"> <!-- Alteração: classe "container-fluid" -->
-        
-            <div class="shopping-list col-md-12"> <!-- Alteração: classe "col-md-8" para ocupar 8 colunas na tela -->
-                <h2>Contas à Pagar</h2>
-                <form id="shopping-form">
-                    <div class="form-row">
-                
-                    <div class="form-group col-md-12"> <!-- Alteração: classe "col-md-6" para ocupar 6 colunas na tela -->
-                        <label for="fornecedor">Fornecedor</label>
-                        <input type="text" id="fornecedor" name="fornecedor" required>
-                    </div>
-                        <div class="form-group col-md-6"> <!-- Alteração: classe "col-md-6" para ocupar 6 colunas na tela -->
-                            <label for="vendedor">Vendedor</label>
-                            <input type="text" id="vendedor" name="vendedor" required>
-                    </div>
-                    <div class="form-group col-md-6"> <!-- Alteração: classe "col-md-6" para ocupar 6 colunas na tela -->
-                        <label for="telefone">Telefone</label>
-                        <input type="tel" id="telefone" name="telefone">
-                    </div>
-                    <div class="form-group col-md-12"> <!-- Alteração: classe "col-md-6" para ocupar 6 colunas na tela -->
-                        <label for="codigo_barras">Código de Barras</label>
-                        <input type="text" id="codigo_barras" name="codigo_barras">
-                    </div>
-                     
-                    
-                      <div class="form-group col-md-4"> <!-- Alteração: classe "col-md-6" para ocupar 6 colunas na tela -->
-                        <label for="valor">Valor</label>
-                        <input type="number" id="valor" name="valor" step="0.01" required>
-                      </div>
-                    
-                   
-                        <div class="form-group col-md-4">
-                            <label for="data_vencimento">Vencimento</label>
-                            <input type="date" id="data_vencimento" name="data_vencimento">
-                        </div>
-                    
-                        <div class="form-group col-md-4">
-                            <label for="data_pagamento">Pagamento</label>
-                            <input type="date" id="data_pagamento" name="data_pagamento">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <button type="submit">Adicionar</button>
-                    </div>
-                </form>
-
-                <!-- Contêiner dos filtros -->
-                <div class="filters-container">
-                    <div>
-                        <label class="filter-label" for="filtro-fornecedor">Filtrar por fornecedor:</label>
-                        <input class="filter-input" type="text" id="filtro-fornecedor" name="filtro-fornecedor">
-                    </div>
-                    <div>
-                        <label class="filter-label" for="filtro-data-vencimento">Filtrar por data de vencimento:</label>
-                        <input class="filter-input" type="date" id="filtro-data-vencimento" name="filtro-data-vencimento">
-                    </div>
-                    <div class="filter-buttons">
-                        <button id="btn-filtrar" class="btn btn-primary">Filtrar</button>
-                        
-                    </div>
-                </div>
-
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th class="text-truncate">Fornecedor</th>
-                                <th class="text-truncate">Vendedor</th>
-                                <th class="text-truncate">Telefone</th>
-                                <th class="text-truncate">Código de Barras</th>
-                                <th class="text-truncate">Valor do Boleto</th>
-                                <th class="text-truncate">Data de Vencimento</th>
-                                <th class="text-truncate">Data de Pagamento</th>
-                                <th class="text-truncate">Editar / Excluir</th>
-                            </tr>
-                        </thead>
-                        <tbody id="shopping-list-tbody"></tbody>
-                        
-                    </table>
-                </div>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col">
+      <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#taskModal">+</button>
+  
+        <!-- Formulário de Cadastro de Contas a Pagar -->
+        <h2>Cadastro de Contas a Pagar</h2>
+        <form id="contas-pagar-form">
+            <div class="form-group">
+                <label for="fornecedor-select">Fornecedor</label>
+                <select id="fornecedor-select" class="form-control">
+                    <!-- As opções de fornecedores serão preenchidas dinamicamente -->
+                </select>
             </div>
-
-            <div class="form-messages col-md-4"> <!-- Alteração: classe "col-md-4" para ocupar 4 colunas na tela -->
-                <div id="form-messages"></div>
+            <div class="form-group">
+                <label for="codigo_barras">Código de Barras</label>
+                <input type="text" id="codigo_barras" class="form-control">
             </div>
-        </div>
+            <div class="form-group">
+                <label for="valor">Valor</label>
+                <input type="number" id="valor" class="form-control" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="data_vencimento">Data de Vencimento</label>
+                <input type="date" id="data_vencimento" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="data_pagamento">Data de Pagamento</label>
+                <input type="date" id="data_pagamento" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar Conta</button>
+        </form>
+
+        <!-- Tabela de Contas a Pagar -->
+        <h2>Lista de Contas a Pagar</h2>
+        <table id="contas-pagar-table" class="table">
+            <thead>
+                <tr>
+                    <th>Fornecedor</th>
+                    <th>Código de Barras</th>
+                    <th>Valor</th>
+                    <th>Data de Vencimento</th>
+                    <th>Data de Pagamento</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- As linhas da tabela serão preenchidas dinamicamente -->
+            </tbody>
+        </table>
+    </div>
+ 
     
+
+<!-- Modal para o formulário de cadastro -->
+    <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="taskModalLabel">Novo Fornecedor</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="fornecedor-form">
+        <div class="form-group">
+                <label for="fornecedor">Fornecedor</label>
+                <input type="text" id="fornecedor" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="vendedor">Vendedor</label>
+                <input type="text" id="vendedor" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="tel" id="telefone" class="form-control">
+            </div>
+            
+            
+    
+      
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Cadastrar Fornecedor</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        
+      </div>
+   </form
+  
+
+ 
+
     <!-- Adicione os scripts do Bootstrap e jQuery (necessário para o Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
@@ -230,334 +124,146 @@
   <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js"></script>
   <script>
-    // Configurações do seu projeto no Firebase
-    var firebaseConfig = {
-      apiKey: "AIzaSyC-AZzKXWy6_mvNcF8QZWuusTjpo6Dj2Hw",
+        // Configurações do seu projeto no Firebase
+        var firebaseConfig = {
+            apiKey: "AIzaSyC-AZzKXWy6_mvNcF8QZWuusTjpo6Dj2Hw",
       authDomain: "projetoweb-6232c.firebaseapp.com",
       databaseURL: "https://projetoweb-6232c.firebaseio.com",
       projectId: "projetoweb-6232c",
       storageBucket: "projetoweb-6232c.appspot.com",
       messagingSenderId: "341899111399",
       appId: "1:341899111399:web:3c5edd575a96808c786b42"
-    };
+        };
 
-    // Inicializa o app do Firebase
-    firebase.initializeApp(firebaseConfig);
+        // Inicializa o app do Firebase
+        firebase.initializeApp(firebaseConfig);
 
-    // Inicializa o Firestore
-    var db = firebase.firestore();
+        // Inicializa o Firestore
+        var db = firebase.firestore();
 
-    // Referências aos elementos do formulário
-    var form = document.getElementById("shopping-form");
-    var fornecedorInput = document.getElementById("fornecedor");
-    var vendedorInput = document.getElementById("vendedor");
-    var telefoneInput = document.getElementById("telefone");
-    var codigoBarrasInput = document.getElementById("codigo_barras");
-    var valorInput = document.getElementById("valor");
-    var dataVencimentoInput = document.getElementById("data_vencimento");
-    var dataPagamentoInput = document.getElementById("data_pagamento");
-    var shoppingList = document.getElementById("shopping-list-ul");
+        // Referências aos elementos dos formulários e da tabela
+        var fornecedorForm = document.getElementById("fornecedor-form");
+        var fornecedorInput = document.getElementById("fornecedor");
+        var vendedorInput = document.getElementById("vendedor");
+        var telefoneInput = document.getElementById("telefone");
+        var contasPagarForm = document.getElementById("contas-pagar-form");
+        var fornecedorSelect = document.getElementById("fornecedor-select");
+        var codigoBarrasInput = document.getElementById("codigo_barras");
+        var valorInput = document.getElementById("valor");
+        var dataVencimentoInput = document.getElementById("data_vencimento");
+        var dataPagamentoInput = document.getElementById("data_pagamento");
+        var contasPagarTable = document.getElementById("contas-pagar-table").getElementsByTagName('tbody')[0];
 
-    // Variável para armazenar o ID da conta a pagar sendo editada (inicialmente nulo)
-    var contaEditId = null;
-
-    // Função para formatar a data no formato dd/mm/aaaa
-    function formatarData(data) {
-      var dataObj = new Date(data);
-      var dia = (dataObj.getDate() + 1).toString().padStart(2, '0');
-      var mes = (dataObj.getMonth() + 1).toString().padStart(2, '0');
-      var ano = dataObj.getFullYear();
-      return dia + '/' + mes + '/' + ano;
-    }
-
-    // Função para editar uma conta a pagar existente
-    function editConta(contaId, data) {
-      fornecedorInput.value = data.fornecedor;
-      vendedorInput.value = data.vendedor;
-      telefoneInput.value = data.telefone;
-      codigoBarrasInput.value = data.codigo_barras;
-      valorInput.value = data.valor;
-      dataVencimentoInput.value = data.data_vencimento;
-      dataPagamentoInput.value = data.data_pagamento;
-
-      // Define o ID da conta a pagar sendo editada
-      contaEditId = contaId;
-
-      // Altera o texto do botão "Adicionar" para "Atualizar"
-      var addButton = document.querySelector("#shopping-form button[type='submit']");
-      addButton.innerText = "Atualizar";
-
-      // Remove o evento anterior do botão "Adicionar" (para adicionar novas contas a pagar)
-      form.removeEventListener("submit", addHandler);
-
-      // Cria um novo evento para o botão "Atualizar"
-      form.addEventListener("submit", updateHandler);
-    }
-
-    // Função para atualizar uma conta a pagar existente
-    function updateHandler(event) {
-      event.preventDefault(); // Evita o comportamento padrão do formulário
-
-      var fornecedor = fornecedorInput.value;
-      var vendedor = vendedorInput.value;
-      var telefone = telefoneInput.value;
-      var codigo_barras = codigoBarrasInput.value;
-      var valor = parseFloat(valorInput.value);
-      var data_vencimento = dataVencimentoInput.value;
-      var data_pagamento = dataPagamentoInput.value || null;
-
-      // Verifica se está editando ou adicionando
-      if (contaEditId) {
-        // Atualiza a conta a pagar no Firestore
-        db.collection("contas_pagar").doc(contaEditId).update({
-          fornecedor: fornecedor,
-          vendedor: vendedor,
-          telefone: telefone,
-          codigo_barras: codigo_barras,
-          valor: valor,
-          data_vencimento: data_vencimento,
-          data_pagamento: data_pagamento
-        })
-        .then(function() {
-          // Limpa os campos do formulário após a atualização
-          form.reset();
-
-          // Exibe uma mensagem de sucesso
-          document.getElementById("form-messages").innerHTML = "Conta a pagar atualizada com sucesso!";
-
-          // Volta a função do botão para "Adicionar"
-          contaEditId = null;
-          var addButton = document.querySelector("#shopping-form button[type='submit']");
-          addButton.innerText = "Adicionar";
-          form.removeEventListener("submit", updateHandler);
-          form.addEventListener("submit", addHandler);
-
-          // Recarrega a lista de contas a pagar após a atualização
-          loadContasAPagar();
-        })
-        .catch(function(error) {
-          // Exibe uma mensagem de erro, se ocorrer algum problema
-          document.getElementById("form-messages").innerHTML = "Erro ao atualizar conta a pagar: " + error;
+        // Função para cadastrar um fornecedor
+        fornecedorForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            var fornecedor = fornecedorInput.value;
+            var vendedor = vendedorInput.value;
+            var telefone = telefoneInput.value;
+            db.collection("fornecedores").add({
+                fornecedor: fornecedor,
+                vendedor: vendedor,
+                telefone: telefone
+            }).then(function (docRef) {
+                fornecedorInput.value = "";
+                vendedorInput.value = "";
+                telefoneInput.value = "";
+                loadFornecedoresDropdown();
+                console.log("Fornecedor cadastrado com ID: ", docRef.id);
+            }).catch(function (error) {
+                console.error("Erro ao cadastrar fornecedor: ", error);
+            });
         });
-      }
-    }
 
-    // Função para adicionar novas contas a pagar
-    function addHandler(event) {
-      event.preventDefault(); // Evita o comportamento padrão do formulário
-
-      var fornecedor = fornecedorInput.value;
-      var vendedor = vendedorInput.value;
-      var telefone = telefoneInput.value;
-      var codigo_barras = codigoBarrasInput.value;
-      var valor = parseFloat(valorInput.value);
-      var data_vencimento = dataVencimentoInput.value;
-      var data_pagamento = dataPagamentoInput.value || null;
-
-      // Adiciona uma nova conta a pagar no Firestore
-      db.collection("contas_pagar").add({
-        fornecedor: fornecedor,
-        vendedor: vendedor,
-        telefone: telefone,
-        codigo_barras: codigo_barras,
-        valor: valor,
-        data_vencimento: data_vencimento,
-        data_pagamento: data_pagamento
-      })
-      .then(function(docRef) {
-        // Limpa os campos do formulário após o cadastro
-        form.reset();
-
-        // Exibe uma mensagem de sucesso
-        document.getElementById("form-messages").innerHTML = "Conta a pagar adicionada com sucesso!";
-      })
-      .catch(function(error) {
-        // Exibe uma mensagem de erro, se ocorrer algum problema
-        document.getElementById("form-messages").innerHTML = "Erro ao adicionar conta a pagar: " + error;
-      });
-    }
-
-    // Função para filtrar a lista de contas a pagar por fornecedor e data de vencimento
-   // Função para filtrar a lista de contas a pagar
-    function filterContasAPagar() {
-      var filtroFornecedor = document.getElementById("filtro-fornecedor").value.trim();
-      var filtroDataVencimento = document.getElementById("filtro-data-vencimento").value;
-
-      // Consulta inicial sem filtro
-      var query = db.collection("contas_pagar");
-
-      // Aplica os filtros se os campos estiverem preenchidos
-      if (filtroFornecedor !== "") {
-        query = query.where("fornecedor", "==", filtroFornecedor);
-      }
-
-      if (filtroDataVencimento !== "") {
-        query = query.where("data_vencimento", "==", filtroDataVencimento);
-      }
-
-      query.onSnapshot(function(querySnapshot) {
-    const shoppingListTable = document.getElementById("shopping-list-tbody");
-    shoppingListTable.innerHTML = ""; // Limpa a tabela antes de atualizá-la
-
-    querySnapshot.forEach(function(doc) {
-      var data = doc.data();
-
-      // Criação da linha e células da tabela
-      var row = document.createElement("tr");
-      row.className = "shopping-list-item";
-
-      var fornecedorCell = document.createElement("td");
-      fornecedorCell.innerText = data.fornecedor;
-      fornecedorCell.setAttribute("style", "white-space: nowrap;"); // Evita a quebra de linha
-
-      var vendedorCell = document.createElement("td");
-      vendedorCell.innerText = data.vendedor;
-      vendedorCell.setAttribute("style", "white-space: nowrap;"); // Evita a quebra de linha
-
-            var telefoneCell = document.createElement("td");
-            telefoneCell.innerText = data.telefone;
-
-            var codigoBarrasCell = document.createElement("td");
-            codigoBarrasCell.innerText = data.codigo_barras;
-
-            var valorCell = document.createElement("td");
-            valorCell.innerText = "R$ " + data.valor.toFixed(2);
-
-            var dataVencimentoCell = document.createElement("td");
-            dataVencimentoCell.innerText = formatarData(data.data_vencimento);
-
-            var dataPagamentoCell = document.createElement("td");
-            dataPagamentoCell.innerText = data.data_pagamento ? formatarData(data.data_pagamento) : "";
-
-            var actionsCell = document.createElement("td");
-            var deleteButton = document.createElement("button");
-            deleteButton.innerText = "Excluir";
-            deleteButton.classList.add("delete-button"); // Adiciona a classe "delete-button" ao botão
-            deleteButton.addEventListener("click", function() {
-              // Exclui a conta a pagar do Firestore
-              db.collection("contas_pagar")
-                .doc(doc.id)
-                .delete()
-                .then(function() {
-                  // Exibe uma mensagem de sucesso
-                  document.getElementById("form-messages").innerHTML = "Conta a pagar excluída com sucesso!";
-                })
-                .catch(function(error) {
-                  // Exibe uma mensagem de erro, se ocorrer algum problema
-                  document.getElementById("form-messages").innerHTML = "Erro ao excluir conta a pagar: " + error;
+        // Função para carregar os fornecedores na lista suspensa
+        function loadFornecedoresDropdown() {
+            fornecedorSelect.innerHTML = '<option value="">Selecione um fornecedor...</option>';
+            db.collection("fornecedores").get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    var data = doc.data();
+                    var option = document.createElement("option");
+                    option.value = doc.id;
+                    option.text = data.fornecedor;
+                    fornecedorSelect.appendChild(option);
                 });
             });
+        }
 
-            var editButton = document.createElement("button");
-            editButton.innerText = "Editar";
-            editButton.addEventListener("click", function() {
-              // Edita a conta a pagar
-              editConta(doc.id, data);
+        // Carrega os fornecedores na lista suspensa ao carregar a página
+        loadFornecedoresDropdown();
+
+        // Função para cadastrar uma conta a pagar
+        contasPagarForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            var fornecedorId = fornecedorSelect.value;
+            var codigoBarras = codigoBarrasInput.value;
+            var valor = parseFloat(valorInput.value);
+            var dataVencimento = dataVencimentoInput.value;
+            var dataPagamento = dataPagamentoInput.value;
+            db.collection("contas_pagar").add({
+                fornecedorId: fornecedorId,
+                codigoBarras: codigoBarras,
+                valor: valor,
+                dataVencimento: dataVencimento,
+                dataPagamento: dataPagamento
+            }).then(function (docRef) {
+                fornecedorSelect.value = "";
+                codigoBarrasInput.value = "";
+                valorInput.value = "";
+                dataVencimentoInput.value = "";
+                dataPagamentoInput.value = "";
+                console.log("Conta cadastrada com ID: ", docRef.id);
+		loadContasPagarTable();
+            }).catch(function (error) {
+                console.error("Erro ao cadastrar conta: ", error);
             });
-
-            actionsCell.appendChild(editButton);
-            actionsCell.appendChild(deleteButton);
-
-            row.appendChild(fornecedorCell);
-            row.appendChild(vendedorCell);
-            row.appendChild(telefoneCell);
-            row.appendChild(codigoBarrasCell);
-            row.appendChild(valorCell);
-            row.appendChild(dataVencimentoCell);
-            row.appendChild(dataPagamentoCell);
-            row.appendChild(actionsCell);
-            shoppingListTable.appendChild(row);
-          });
         });
-    }
 
-    // Função para carregar a lista de contas a pagar
-    function loadContasAPagar() {
-      db.collection("contas_pagar").onSnapshot(function(querySnapshot) {
-        const shoppingListTable = document.getElementById("shopping-list-tbody");
-        shoppingListTable.innerHTML = ""; // Limpa a tabela antes de atualizá-la
+        // Função para carregar as contas a pagar na tabela
+        function loadContasPagarTable() {
+            contasPagarTable.innerHTML = "";
+            db.collection("contas_pagar").get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    var data = doc.data();
+                    var fornecedorRef = db.collection("fornecedores").doc(data.fornecedorId);
+                    fornecedorRef.get().then(function (fornecedorDoc) {
+                        var fornecedorData = fornecedorDoc.data();
+                        var row = contasPagarTable.insertRow(-1);
+                        var fornecedorCell = row.insertCell(0);
+                        var codigoBarrasCell = row.insertCell(1);
+                        var valorCell = row.insertCell(2);
+                        var dataVencimentoCell = row.insertCell(3);
+                        var dataPagamentoCell = row.insertCell(4);
+                        var actionsCell = row.insertCell(5);
+                        fornecedorCell.innerHTML = fornecedorData.fornecedor;
+                        codigoBarrasCell.innerHTML = data.codigoBarras;
+                        valorCell.innerHTML = data.valor.toFixed(2);
+                        dataVencimentoCell.innerHTML = data.dataVencimento;
+                        dataPagamentoCell.innerHTML = data.dataPagamento;
+                        actionsCell.innerHTML = '<button class="btn btn-sm btn-danger" onclick="deleteConta(\'' + doc.id + '\')">Excluir</button>';
+                    });
+                });
+            });
+        }
 
-        querySnapshot.forEach(function(doc) {
-          var data = doc.data();
+        // Função para excluir uma conta a pagar
+        function deleteConta(contaId) {
+            db.collection("contas_pagar").doc(contaId).delete().then(function () {
+                console.log("Conta excluída com sucesso!");
+                loadContasPagarTable();
+            }).catch(function (error) {
+                console.error("Erro ao excluir conta: ", error);
+            });
+        }
 
-          var row = document.createElement("tr");
-          row.className = "shopping-list-item";
+        // Carrega as contas a pagar na tabela ao carregar a página
+        loadContasPagarTable();
+    </script>
 
-          var fornecedorCell = document.createElement("td");
-          fornecedorCell.innerText = data.fornecedor;
-
-          var vendedorCell = document.createElement("td");
-          vendedorCell.innerText = data.vendedor;
-
-          var telefoneCell = document.createElement("td");
-          telefoneCell.innerText = data.telefone;
-
-          var codigoBarrasCell = document.createElement("td");
-          codigoBarrasCell.innerText = data.codigo_barras;
-
-          var valorCell = document.createElement("td");
-          valorCell.innerText = "R$ " + data.valor.toFixed(2);
-
-          var dataVencimentoCell = document.createElement("td");
-          dataVencimentoCell.innerText = formatarData(data.data_vencimento);
-
-          var dataPagamentoCell = document.createElement("td");
-          dataPagamentoCell.innerText = data.data_pagamento ? formatarData(data.data_pagamento) : "";
-
-          var actionsCell = document.createElement("td");
-          var deleteButton = document.createElement("button");
-          deleteButton.innerText = "✘";
-          deleteButton.classList.add("delete-button"); // Adiciona a classe "delete-button" ao botão
-          deleteButton.addEventListener("click", function() {
-            // Exclui a conta a pagar do Firestore
-            db.collection("contas_pagar")
-              .doc(doc.id)
-              .delete()
-              .then(function() {
-                // Exibe uma mensagem de sucesso
-                document.getElementById("form-messages").innerHTML = "Conta a pagar excluída com sucesso!";
-              })
-              .catch(function(error) {
-                // Exibe uma mensagem de erro, se ocorrer algum problema
-                document.getElementById("form-messages").innerHTML = "Erro ao excluir conta a pagar: " + error;
-              });
-          });
-
-          var editButton = document.createElement("button");
-          editButton.innerText = "✎";
-          editButton.addEventListener("click", function() {
-            // Edita a conta a pagar
-            editConta(doc.id, data);
-          });
-
-          actionsCell.appendChild(editButton);
-          actionsCell.appendChild(deleteButton);
-
-          row.appendChild(fornecedorCell);
-          row.appendChild(vendedorCell);
-          row.appendChild(telefoneCell);
-          row.appendChild(codigoBarrasCell);
-          row.appendChild(valorCell);
-          row.appendChild(dataVencimentoCell);
-          row.appendChild(dataPagamentoCell);
-          row.appendChild(actionsCell);
-          shoppingListTable.appendChild(row);
-        });
-      });
-    }
-
-    // Manipula o envio do formulário (para adicionar novas contas a pagar)
-    form.addEventListener("submit", addHandler);
-
-    // Manipula o clique do botão de filtrar
-    document.getElementById("btn-filtrar").addEventListener("click", function(event) {
-      event.preventDefault();
-      filterContasAPagar();
-    });
-
-    // Chama a função para carregar a lista de contas a pagar
-    loadContasAPagar();
-
-  </script>
+    <!-- Adicione o link para o Bootstrap JavaScript no final do body -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
 </body>
+
+
 </html>
