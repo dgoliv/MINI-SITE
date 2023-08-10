@@ -1,269 +1,794 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD de Contas a Pagar</title>
-    <!-- Adicione os links para o Firebase e o Bootstrap CSS -->
-    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Seu estilo CSS personalizado aqui -->
+    <title>Painel Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js"></script>
     <style>
-        /* Seu estilo CSS aqui */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #sidebar {
+            height: 100vh;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: -200px;
+            background-color: #333;
+            transition: left 0.5s;
+        }
+        #content {
+        margin-left: 100px; /* Inicialmente, sem margem esquerda */
+        padding: 20px;
+        transition: margin-left 0.3s;
+        }
         
-       
+        
+        .menu-item {
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .menu-item:hover {
+            background-color: #555;
+        }
+        .menu-icon {
+            margin-right: 10px;
+        }
+        #toggleSidebar {
+            position: fixed;
+            top: 20px;
+            left: 1px;
+            background-color: none;
+            color: black;
+            border: none;
+            padding: 2px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #toggleSidebar:hover {
+            background-color: #0056b3;
+        }
+        #closeSidebar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        /* Estilos do formulário */
+        .form-container {
+            display: none;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .form-data {
+            margin-top: 20px;
+        }
         
     </style>
 </head>
-
 <body>
-<div class="container mt-4">
-  <div class="row">
-    <div class="col">
-      <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#taskModal">+</button>
-  
-        <!-- Formulário de Cadastro de Contas a Pagar -->
-        <h2>Cadastro de Contas a Pagar</h2>
-        <form id="contas-pagar-form">
-            <div class="form-group">
-                <label for="fornecedor-select">Fornecedor</label>
-                <select id="fornecedor-select" class="form-control">
-                    <!-- As opções de fornecedores serão preenchidas dinamicamente -->
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="codigo_barras">Código de Barras</label>
-                <input type="text" id="codigo_barras" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="valor">Valor</label>
-                <input type="number" id="valor" class="form-control" step="0.01" required>
-            </div>
-            <div class="form-group">
-                <label for="data_vencimento">Data de Vencimento</label>
-                <input type="date" id="data_vencimento" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="data_pagamento">Data de Pagamento</label>
-                <input type="date" id="data_pagamento" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary">Cadastrar Conta</button>
-        </form>
-
-        <!-- Tabela de Contas a Pagar -->
-        <h2>Lista de Contas a Pagar</h2>
-        <table id="contas-pagar-table" class="table">
-            <thead>
-                <tr>
-                    <th>Fornecedor</th>
-                    <th>Código de Barras</th>
-                    <th>Valor</th>
-                    <th>Data de Vencimento</th>
-                    <th>Data de Pagamento</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- As linhas da tabela serão preenchidas dinamicamente -->
-            </tbody>
-        </table>
+    <div id="sidebar">
+        <i id="closeSidebar" class="fas fa-times"></i>
+        <a href="#" class="menu-item" onclick="showForm('fornecedor-form')"><i class="fas fa-user menu-icon"></i> Fornecedores</a>
+        <a href="#" class="menu-item" onclick="showForm('contas-pagar-form')"><i class="fas fa-money-bill menu-icon"></i> Contas à Pagar</a>
     </div>
- 
-    
-
-<!-- Modal para o formulário de cadastro -->
-    <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="taskModalLabel">Novo Fornecedor</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-          <span aria-hidden="true">&times;</span>
+   <div id="content">
+        <button id="toggleSidebar" class="btn" onclick="alternarSidebar()">
+            <i class="fas fa-bars"></i>
         </button>
-      </div>
-      <div class="modal-body">
-        <form id="fornecedor-form">
-        <div class="form-group">
-                <label for="fornecedor">Fornecedor</label>
-                <input type="text" id="fornecedor" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="vendedor">Vendedor</label>
-                <input type="text" id="vendedor" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="telefone">Telefone</label>
-                <input type="tel" id="telefone" class="form-control">
-            </div>
-            
-            
-    
-      
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Cadastrar Fornecedor</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+
         
-      </div>
-   </form
-  
+        <!-- Formulário de Cadastro de Fornecedores -->
+        <div id="fornecedor-form" class="form-container">
+            <h2 class="mb-4">Cadastro de Fornecedores</h2>
+            <form id="cadastro-fornecedor-form">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome do Fornecedor:</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
+                </div>
 
- 
+                <div class="mb-3">
+                    <label for="vendedor" class="form-label">Vendedor:</label>
+                    <input type="text" class="form-control" id="vendedor" name="vendedor" required>
+                </div>
 
-    <!-- Adicione os scripts do Bootstrap e jQuery (necessário para o Bootstrap) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Adicione este link ao head para incluir os ícones do Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-2OG7IQb5LQSj+64I4Ifrqz9X3qWhgJgzvoUUg6bIyIiYpLZC2mh1I5i/r8i63tFna3x6MkFjuqalnKlQMqlLg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <div class="mb-3">
+                    <label for="telefone" class="form-label">Telefone:</label>
+                    <input type="tel" class="form-control" id="telefone" name="telefone">
+                </div>
 
-  <!-- Configurações do Firebase e Firestore -->
-  <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js"></script>
-  <script>
-        // Configurações do seu projeto no Firebase
-        var firebaseConfig = {
-            apiKey: "AIzaSyC-AZzKXWy6_mvNcF8QZWuusTjpo6Dj2Hw",
-      authDomain: "projetoweb-6232c.firebaseapp.com",
-      databaseURL: "https://projetoweb-6232c.firebaseio.com",
-      projectId: "projetoweb-6232c",
-      storageBucket: "projetoweb-6232c.appspot.com",
-      messagingSenderId: "341899111399",
-      appId: "1:341899111399:web:3c5edd575a96808c786b42"
-        };
+                <button type="submit" class="btn btn-primary" id="cadastrarFornecedorButton">Cadastrar Fornecedor</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 
-        // Inicializa o app do Firebase
-        firebase.initializeApp(firebaseConfig);
 
-        // Inicializa o Firestore
-        var db = firebase.firestore();
+            </form>
+            <!-- Dados Cadastrados -->
+            <!-- Lista de Fornecedores Cadastrados -->
+                <div class="form-data">
+                    <h3>Fornecedores Cadastrados:</h3>
+                    <ul id="fornecedores-dados" class="list-group">
+                        <!-- A lista de fornecedores cadastrados será preenchida dinamicamente aqui -->
+                    </ul>
+                </div>
 
-        // Referências aos elementos dos formulários e da tabela
-        var fornecedorForm = document.getElementById("fornecedor-form");
-        var fornecedorInput = document.getElementById("fornecedor");
-        var vendedorInput = document.getElementById("vendedor");
-        var telefoneInput = document.getElementById("telefone");
-        var contasPagarForm = document.getElementById("contas-pagar-form");
-        var fornecedorSelect = document.getElementById("fornecedor-select");
-        var codigoBarrasInput = document.getElementById("codigo_barras");
-        var valorInput = document.getElementById("valor");
-        var dataVencimentoInput = document.getElementById("data_vencimento");
-        var dataPagamentoInput = document.getElementById("data_pagamento");
-        var contasPagarTable = document.getElementById("contas-pagar-table").getElementsByTagName('tbody')[0];
+        </div>
+    <!-- Formulário de Contas à Pagar -->
+        <div id="contas-pagar-form" class="form-container">
+            <h2 class="mb-4">Contas à Pagar</h2>
+            <form id="contas-pagar-form">
+        <div class="mb-3">
+            <label for="fornecedorSelect">Fornecedor</label>
+            <select class="form-select" id="fornecedorSelect" required>
+                
+                <!-- As opções serão preenchidas dinamicamente via JavaScript -->
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="codigoBarras">Código de Barras</label>
+            <input type="text" class="form-control" id="codigoBarras" required>
+        </div>
+        <div class="mb-3">
+            <label for="dataVencimento">Data de Vencimento</label>
+            <input type="date" class="form-control" id="dataVencimento" required>
+        </div>
+        <div class="mb-3">
+            <label for="valor">Valor</label>
+            <input type="number" class="form-control" id="valor" required>
+        </div>
+        <div class="mb-3">
+            <label for="dataPagamento">Data de Pagamento</label>
+            <input type="date" class="form-control" id="dataPagamento">
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar Conta</button>
+    </form>
+    
+    <div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h6 class="card-title">Contas a Vencer</h6>
+                <p class="card-text" id="totalAaVencer">R$ 0,00</p>
+            </div>
+        </div>
+    </div>
+    
 
-        // Função para cadastrar um fornecedor
-        fornecedorForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-            var fornecedor = fornecedorInput.value;
-            var vendedor = vendedorInput.value;
-            var telefone = telefoneInput.value;
-            db.collection("fornecedores").add({
-                fornecedor: fornecedor,
-                vendedor: vendedor,
-                telefone: telefone
-            }).then(function (docRef) {
-                fornecedorInput.value = "";
-                vendedorInput.value = "";
-                telefoneInput.value = "";
-                loadFornecedoresDropdown();
-                console.log("Fornecedor cadastrado com ID: ", docRef.id);
-            }).catch(function (error) {
-                console.error("Erro ao cadastrar fornecedor: ", error);
-            });
-        });
 
-        // Função para carregar os fornecedores na lista suspensa
-        function loadFornecedoresDropdown() {
-            fornecedorSelect.innerHTML = '<option value="">Selecione um fornecedor...</option>';
-            db.collection("fornecedores").get().then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                    var data = doc.data();
-                    var option = document.createElement("option");
-                    option.value = doc.id;
-                    option.text = data.fornecedor;
-                    fornecedorSelect.appendChild(option);
-                });
-            });
+    <div class="col-md-4">
+        <div class="card bg-danger text-white">
+            <div class="card-body">
+                <h6 class="card-title">Contas Vencidas</h6>
+                <p class="card-text" id="totalVencidas">R$ 0,00</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-dark text-white">
+            <div class="card-body">
+                <h6 class="card-title">Total Geral</h6>
+                <p class="card-text" id="totalValoresNaoPagos">R$ 0,00</p>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="mb-3">
+    <label for="filtroFornecedor">Filtro por Fornecedor</label>
+    <select class="form-select" id="filtroFornecedor">
+        <option value="">Todos os Fornecedores</option>
+        <!-- Opções de fornecedores serão preenchidas dinamicamente via JavaScript -->
+    </select>
+</div>
+
+<div class="mb-3">
+    <label for="filtroDataInicio">Data Início</label>
+    <input type="date" class="form-control" id="filtroDataInicio">
+</div>
+<div class="mb-3">
+    <label for="filtroDataFim">Data Fim</label>
+    <input type="date" class="form-control" id="filtroDataFim">
+</div>
+<div class="mb-3">
+        <button type="button" class="btn btn-primary" id="btnFiltrar">Filtrar</button>
+    </div>
+    
+   
+</div>
+
+
+
+
+    <h2 class="mt-4">Lista de Contas a Pagar</h2>
+    <ul id="contas-pagar-list" class="list-group">
+        <!-- A lista de contas a pagar será preenchida dinamicamente aqui -->
+    </ul>
+</div>
+
+
+
+
+<!-- Incluir scripts do Bootstrap e do Firebase -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-firestore.js"></script>
+
+<script>
+    // Configurar o Firebase (substituir com suas próprias configurações)
+    const firebaseConfig = {
+        apiKey: "AIzaSyC-AZzKXWy6_mvNcF8QZWuusTjpo6Dj2Hw",
+        authDomain: "projetoweb-6232c.firebaseapp.com",
+        databaseURL: "https://projetoweb-6232c.firebaseio.com",
+        projectId: "projetoweb-6232c",
+        storageBucket: "projetoweb-6232c.appspot.com",
+        messagingSenderId: "341899111399",
+        appId: "1:341899111399:web:3c5edd575a96808c786b42"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Referências aos elementos do formulário
+    const contasPagarForm = document.getElementById('contas-pagar-form');
+    const fornecedorSelect = document.getElementById('fornecedorSelect');
+    const codigoBarrasInput = document.getElementById('codigoBarras');
+    const dataVencimentoInput = document.getElementById('dataVencimento');
+    const valorInput = document.getElementById('valor');
+    const dataPagamentoInput = document.getElementById('dataPagamento');
+    const contasPagarList = document.getElementById('contas-pagar-list');
+    
+    // Variável de controle de modo de edição
+    let editMode = false;
+    
+    
+    // Referência ao formulário de cadastro de fornecedores
+const cadastroFornecedorForm = document.getElementById('cadastro-fornecedor-form');
+
+// Adicionar evento de envio do formulário
+cadastroFornecedorForm.addEventListener('submit', cadastrarNovoFornecedor);
+
+// Abra o sidebar e selecione a aba de Contas a Pagar
+        window.onload = function() {
+            const sidebar = document.getElementById('sidebar');
+            const toggleSidebar = document.getElementById('toggleSidebar');
+            
+            // Abra o sidebar e torne o botão de alternar visível
+            sidebar.style.left = '0';
+            toggleSidebar.style.visibility = 'hidden';
+            content.style.marginLeft = '180px'; // Adicionar margem ao conteúdo
+            
+            // Chame a função para mostrar o formulário de Contas a Pagar
+            showForm('contas-pagar-form');
         }
 
-        // Carrega os fornecedores na lista suspensa ao carregar a página
-        loadFornecedoresDropdown();
 
-        // Função para cadastrar uma conta a pagar
-        contasPagarForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-            var fornecedorId = fornecedorSelect.value;
-            var codigoBarras = codigoBarrasInput.value;
-            var valor = parseFloat(valorInput.value);
-            var dataVencimento = dataVencimentoInput.value;
-            var dataPagamento = dataPagamentoInput.value;
-            db.collection("contas_pagar").add({
-                fornecedorId: fornecedorId,
-                codigoBarras: codigoBarras,
-                valor: valor,
-                dataVencimento: dataVencimento,
-                dataPagamento: dataPagamento
-            }).then(function (docRef) {
-                fornecedorSelect.value = "";
-                codigoBarrasInput.value = "";
-                valorInput.value = "";
-                dataVencimentoInput.value = "";
-                dataPagamentoInput.value = "";
-                console.log("Conta cadastrada com ID: ", docRef.id);
-		loadContasPagarTable();
-            }).catch(function (error) {
-                console.error("Erro ao cadastrar conta: ", error);
+// Função para cadastrar um novo fornecedor
+function cadastrarNovoFornecedor(e) {
+    e.preventDefault();
+
+    const nomeFornecedor = document.getElementById('nome').value;
+    const vendedor = document.getElementById('vendedor').value;
+    const telefone = document.getElementById('telefone').value;
+
+    db.collection('fornecedores').add({
+        fornecedor: nomeFornecedor,
+        vendedor: vendedor,
+        telefone: telefone
+    })
+    .then(() => {
+        // Limpar o formulário após o cadastro
+        cadastroFornecedorForm.reset();
+        // Atualizar a lista de fornecedores
+        carregarFornecedores();
+        console.log('Fornecedor cadastrado com sucesso!');
+    })
+    .catch((error) => {
+        console.error('Erro ao cadastrar fornecedor:', error);
+    });
+}
+
+    // Referência à lista de fornecedores cadastrados
+const fornecedoresDadosList = document.getElementById('fornecedores-dados');
+
+// Função para carregar a lista de fornecedores cadastrados do Firestore
+function carregarFornecedoresCadastrados() {
+    fornecedoresDadosList.innerHTML = ''; // Limpar a lista antes de preencher
+
+    db.collection('fornecedores').get()
+    .then((snapshot) => {
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            const item = criarItemListaFornecedoresCadastrados(doc.id, data.fornecedor, data.vendedor, data.telefone);
+            fornecedoresDadosList.appendChild(item);
+        });
+    })
+    .catch((error) => {
+        console.error("Erro ao carregar fornecedores cadastrados: ", error);
+    });
+}
+
+// Função para criar um item de lista para um fornecedor cadastrado com botão dropdown
+function criarItemListaFornecedoresCadastrados(id, nome, vendedor, telefone) {
+    const item = document.createElement('li');
+    item.className = 'list-group-item';
+
+    const conteudo = `
+        <strong>Nome:</strong> ${nome}<br>
+        <strong>Vendedor:</strong> ${vendedor}<br>
+        <strong>Telefone:</strong> ${telefone || 'Não informado'}
+    `;
+
+    item.innerHTML = conteudo;
+
+    // Adicionar botão dropdown aos itens da lista
+    const dropdownContainer = document.createElement('div');
+    dropdownContainer.className = 'dropdown float-end';
+
+    const dropdownButton = document.createElement('button');
+    dropdownButton.className = 'btn btn-secondary dropdown-toggle';
+    dropdownButton.type = 'button';
+    dropdownButton.id = `dropdown-${id}`;
+    dropdownButton.setAttribute('data-bs-toggle', 'dropdown');
+    dropdownButton.setAttribute('aria-haspopup', 'true');
+    dropdownButton.setAttribute('aria-expanded', 'false');
+    dropdownButton.innerHTML = 'Ações';
+
+    const dropdownMenu = document.createElement('div');
+    dropdownMenu.className = 'dropdown-menu';
+    dropdownMenu.setAttribute('aria-labelledby', `dropdown-${id}`);
+
+    const editarButton = document.createElement('button');
+    editarButton.className = 'dropdown-item';
+    editarButton.innerHTML = 'Editar';
+    editarButton.addEventListener('click', () => {
+        editarFornecedor(id);
+    });
+
+    const excluirButton = document.createElement('button');
+    excluirButton.className = 'dropdown-item';
+    excluirButton.innerHTML = 'Excluir';
+    excluirButton.addEventListener('click', () => {
+        excluirFornecedor(id);
+    });
+
+    dropdownMenu.appendChild(editarButton);
+    dropdownMenu.appendChild(excluirButton);
+
+    dropdownContainer.appendChild(dropdownButton);
+    dropdownContainer.appendChild(dropdownMenu);
+
+    item.appendChild(dropdownContainer);
+
+    return item;
+}
+
+function editarFornecedor(id) {
+    const docRef = db.collection('fornecedores').doc(id);
+
+    docRef.get()
+    .then((doc) => {
+        if (doc.exists) {
+            const data = doc.data();
+
+            // Preencher os campos do modal/formulário de edição
+            const editNomeInput = document.getElementById('nome');
+            const editVendedorInput = document.getElementById('vendedor');
+            const editTelefoneInput = document.getElementById('telefone');
+            
+            editNomeInput.value = data.fornecedor;
+            editVendedorInput.value = data.vendedor;
+            editTelefoneInput.value = data.telefone || '';
+
+            // Abra o modal ou exiba o formulário de edição
+            // ...
+
+            // Adicione um botão de salvar que chama a função para atualizar no Firebase
+            const cadastrarButton = cadastroFornecedorForm.querySelector('button[type="submit"]');
+            cadastrarButton.textContent = 'Salvar Edições';
+        
+            cadastroFornecedorForm.removeEventListener('submit', cadastrarNovoFornecedor);
+            cadastroFornecedorForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+    
+            const novoNome = editNomeInput.value;
+            const novoVendedor = editVendedorInput.value;
+            const novoTelefone = editTelefoneInput.value;
+
+
+                docRef.update({
+                    fornecedor: novoNome,
+                    vendedor: novoVendedor,
+                    telefone: novoTelefone || null
+                    
+                })
+                .then(() => {
+                        
+                        carregarFornecedores();cadastroFornecedorForm.reset();
+                        carregarFornecedoresCadastrados(); // Recarregar a lista após a edição
+
+                        // Voltar ao modo de cadastro após a edição
+                        cadastrarButton.textContent = 'Cadastrar Fornecedor';
+                })
+                .catch((error) => {
+                    console.error('Erro ao atualizar fornecedor:', error);
+                });
             });
+        } else {
+            console.error('Fornecedor não encontrado para edição');
+        }
+    })
+    .catch((error) => {
+        console.error('Erro ao obter dados para edição:', error);
+    });
+}
+
+
+
+// Função para excluir um fornecedor
+function excluirFornecedor(id) {
+    if (confirm('Deseja realmente excluir este fornecedor?')) {
+        db.collection('fornecedores').doc(id).delete()
+        .then(() => {
+            console.log('Fornecedor excluído com sucesso:', id);
+            carregarFornecedoresCadastrados(); // Recarregar a lista após a exclusão
+        })
+        .catch((error) => {
+            console.error('Erro ao excluir fornecedor:', error);
+        });
+    }
+}
+
+// Chamar a função para carregar a lista de fornecedores cadastrados quando a página carregar
+carregarFornecedoresCadastrados()
+
+
+    
+    // Preencher a lista suspensa com nomes de fornecedores do Firestore
+    // Função para carregar os fornecedores no campo de filtro
+// Função para carregar os fornecedores no campo de filtro e na lista suspensa
+function carregarFornecedores() {
+    const fornecedorSelect = document.getElementById('fornecedorSelect');
+    const filtroFornecedor = document.getElementById('filtroFornecedor');
+
+    // Limpar opções existentes
+    fornecedorSelect.innerHTML = '';
+    filtroFornecedor.innerHTML = '';
+
+    // Adicionar opção "Todos os Fornecedores"
+    const opcaoTodos = document.createElement('option');
+    opcaoTodos.value = '';
+    opcaoTodos.textContent = 'Todos os Fornecedores';
+    fornecedorSelect.appendChild(opcaoTodos);
+    filtroFornecedor.appendChild(opcaoTodos);
+
+    db.collection('fornecedores').get()
+    .then((snapshot) => {
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            
+            // Adicionar opções aos campos de seleção
+            const optionFornecedor = document.createElement('option');
+            optionFornecedor.value = doc.id;
+            optionFornecedor.textContent = data.fornecedor;
+            fornecedorSelect.appendChild(optionFornecedor);
+
+            const optionFiltro = document.createElement('option');
+            optionFiltro.value = doc.id;
+            optionFiltro.textContent = data.fornecedor;
+            filtroFornecedor.appendChild(optionFiltro);
+        });
+    })
+    .catch((error) => {
+        console.error("Erro ao carregar fornecedores: ", error);
+    });
+}
+
+    // Adicionar evento de envio do formulário
+    contasPagarForm.addEventListener('submit', cadastrarNovaConta);
+
+    // Função para cadastrar uma nova conta a pagar
+    function cadastrarNovaConta(e) {
+        e.preventDefault();
+
+        const fornecedorId = fornecedorSelect.value;
+        const codigoBarras = codigoBarrasInput.value;
+        const dataVencimento = dataVencimentoInput.value;
+        const valor = parseFloat(valorInput.value);
+        const dataPagamento = dataPagamentoInput.value;
+
+        db.collection('contasPagar').add({
+            fornecedorId: fornecedorId,
+            codigoBarras: codigoBarras,
+            dataVencimento: dataVencimento,
+            valor: valor,
+            dataPagamento: dataPagamento || null
+        })
+        .then(() => {
+            contasPagarForm.reset();
+            carregarContasPagar(); // Recarregar a lista após o cadastro
+        })
+        .catch((error) => {
+            console.error("Erro ao cadastrar conta a pagar: ", error);
+        });
+    }
+
+    // Função para criar um item de lista para uma conta a pagar
+    function criarItemListaContasPagar(id, fornecedorNome, codigoBarras, dataVencimento, valor, dataPagamento) {
+        const item = document.createElement('li');
+        item.className = 'list-group-item';
+
+        const dataVencimentoFormatada = new Date(dataVencimento + 'T00:00:00').toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
         });
 
-        // Função para carregar as contas a pagar na tabela
-        function loadContasPagarTable() {
-            contasPagarTable.innerHTML = "";
-            db.collection("contas_pagar").get().then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                    var data = doc.data();
-                    var fornecedorRef = db.collection("fornecedores").doc(data.fornecedorId);
-                    fornecedorRef.get().then(function (fornecedorDoc) {
-                        var fornecedorData = fornecedorDoc.data();
-                        var row = contasPagarTable.insertRow(-1);
-                        var fornecedorCell = row.insertCell(0);
-                        var codigoBarrasCell = row.insertCell(1);
-                        var valorCell = row.insertCell(2);
-                        var dataVencimentoCell = row.insertCell(3);
-                        var dataPagamentoCell = row.insertCell(4);
-                        var actionsCell = row.insertCell(5);
-                        fornecedorCell.innerHTML = fornecedorData.fornecedor;
-                        codigoBarrasCell.innerHTML = data.codigoBarras;
-                        valorCell.innerHTML = data.valor.toFixed(2);
-                        dataVencimentoCell.innerHTML = data.dataVencimento;
-                        dataPagamentoCell.innerHTML = data.dataPagamento;
-                        actionsCell.innerHTML = '<button class="btn btn-sm btn-danger" onclick="deleteConta(\'' + doc.id + '\')">Excluir</button>';
+        const conteudo = `
+            <strong>Fornecedor:</strong> ${fornecedorNome}<br>
+            <strong>Código de Barras:</strong> ${codigoBarras}<br>
+            <strong>Data de Vencimento:</strong> ${dataVencimentoFormatada}<br>
+            <strong>Valor:</strong> R$ ${valor.toFixed(2)}<br>
+            <strong>Data de Pagamento:</strong> ${dataPagamento || 'Não pago'}
+        `;
+
+        item.innerHTML = conteudo;
+        // Adicionar botão dropdown aos itens da lista
+        const dropdownContainer = document.createElement('div');
+        dropdownContainer.className = 'dropdown float-end';
+
+        const dropdownButton = document.createElement('button');
+        dropdownButton.className = 'btn btn-secondary dropdown-toggle';
+        dropdownButton.type = 'button';
+        dropdownButton.id = `dropdown-${id}`;
+        dropdownButton.setAttribute('data-bs-toggle', 'dropdown');
+        dropdownButton.setAttribute('aria-haspopup', 'true');
+        dropdownButton.setAttribute('aria-expanded', 'false');
+        dropdownButton.innerHTML = 'Ações';
+
+        const dropdownMenu = document.createElement('div');
+        dropdownMenu.className = 'dropdown-menu';
+        dropdownMenu.setAttribute('aria-labelledby', `dropdown-${id}`);
+
+        const editarButton = document.createElement('button');
+        editarButton.className = 'dropdown-item';
+        editarButton.innerHTML = 'Editar';
+        editarButton.addEventListener('click', () => {
+            editarContaPagar(id);
+            
+        });
+
+        const excluirButton = document.createElement('button');
+        excluirButton.className = 'dropdown-item';
+        excluirButton.innerHTML = 'Excluir';
+        excluirButton.addEventListener('click', () => {
+            excluirContaPagar(id);
+        });
+
+        dropdownMenu.appendChild(editarButton);
+        dropdownMenu.appendChild(excluirButton);
+
+        dropdownContainer.appendChild(dropdownButton);
+        dropdownContainer.appendChild(dropdownMenu);
+
+        item.appendChild(dropdownContainer);
+
+        return item;
+    }
+    
+    
+
+    // Função para carregar a lista de contas a pagar do Firestore, considerando os filtros
+function carregarContasPagar() {
+    const contasPagarForm = document.getElementById('contas-pagar-form');
+    const filtroFornecedor = document.getElementById('filtroFornecedor');
+    const filtroDataInicio = document.getElementById('filtroDataInicio').value;
+    const filtroDataFim = document.getElementById('filtroDataFim').value;
+    
+    let totalAaVencer = 0;
+    let totalVencendoHoje = 0;
+    let totalVencidas = 0;
+    let totalValoresNaoPagos = 0;
+    const dataAtual = new Date();
+
+    db.collection('contasPagar').get()
+    .then((snapshot) => {
+        contasPagarList.innerHTML = ''; // Limpar a lista antes de preencher
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            const fornecedorRef = db.collection('fornecedores').doc(data.fornecedorId);
+
+            const dataVencimento = new Date(data.dataVencimento);
+            const dataVencimentoDentroDoIntervalo = (!filtroDataInicio || dataVencimento >= new Date(filtroDataInicio)) && (!filtroDataFim || dataVencimento <= new Date(filtroDataFim));
+
+            if ((!filtroFornecedor.value || filtroFornecedor.value === data.fornecedorId) && dataVencimentoDentroDoIntervalo) {
+                fornecedorRef.get()
+                .then((fornecedorDoc) => {
+                    if (fornecedorDoc.exists) {
+                        const fornecedorData = fornecedorDoc.data();
+                        const item = criarItemListaContasPagar(
+                            doc.id,
+                            fornecedorData.fornecedor,
+                            data.codigoBarras,
+                            data.dataVencimento,
+                            data.valor,
+                            data.dataPagamento
+                        );
+                        contasPagarList.appendChild(item);
+
+                        if (dataVencimento > dataAtual) {
+                            totalAaVencer += data.valor;
+                        }
+
+                        if (!data.dataPagamento) {
+                            totalValoresNaoPagos += data.valor;
+                        }
+
+                        // Contas Vencidas
+                        if (dataVencimento < dataAtual) {
+                            totalVencidas += data.valor;
+                        }
+
+                          // Vencendo Hoje
+                        if (dataVencimento.toDateString() == dataAtual.toDateString()) {
+                            totalVencendoHoje += data.valor;
+                        }
+
+                        document.getElementById('totalAaVencer').textContent = `R$ ${totalAaVencer.toFixed(2)}`;
+                        
+                        document.getElementById('totalValoresNaoPagos').textContent = `R$ ${totalValoresNaoPagos.toFixed(2)}`;
+                        document.getElementById('totalVencidas').textContent = `R$ ${totalVencidas.toFixed(2)}`;
+                    }
+                })
+                .catch((error) => {
+                    console.error("Erro ao obter fornecedor: ", error);
+                });
+            }
+        });
+    })
+    .catch((error) => {
+        console.error("Erro ao carregar contas a pagar: ", error);
+    });
+}
+    
+
+
+// Evento do botão Filtrar
+document.getElementById('btnFiltrar').addEventListener('click', () => {
+    carregarContasPagar();
+});
+
+
+
+
+    // Função para excluir uma conta a pagar com base no ID
+    function excluirContaPagar(id) {
+        if (confirm('Deseja realmente excluir esta conta a pagar?')) {
+            db.collection('contasPagar').doc(id).delete()
+            .then(() => {
+                console.log('Conta a pagar excluída com sucesso:', id);
+                carregarContasPagar(); // Recarregar a lista após a exclusão
+            })
+            .catch((error) => {
+                console.error('Erro ao excluir conta a pagar:', error);
+            });
+        }
+    }
+
+    // Função para editar uma conta a pagar com base no ID
+    function editarContaPagar(id) {
+        const contasPagarForm = document.getElementById('contas-pagar-form');
+        const docRef = db.collection('contasPagar').doc(id);
+
+        docRef.get()
+        .then((doc) => {
+            if (doc.exists) {
+                const data = doc.data();
+
+                fornecedorSelect.value = data.fornecedorId;
+                codigoBarrasInput.value = data.codigoBarras;
+                dataVencimentoInput.value = data.dataVencimento;
+                valorInput.value = data.valor;
+                dataPagamentoInput.value = data.dataPagamento || '';
+
+                // Alterar texto do botão e evento de envio do formulário para edição
+                const cadastrarButton = contasPagarForm.querySelector('button[type="submit"]');
+                cadastrarButton.textContent = 'Alterar Conta';
+
+                contasPagarForm.removeEventListener('submit', cadastrarNovaConta);
+                contasPagarForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    carregarContasPagar();
+
+                    const fornecedorId = fornecedorSelect.value;
+                    const codigoBarras = codigoBarrasInput.value;
+                    const dataVencimento = dataVencimentoInput.value;
+                    const valor = parseFloat(valorInput.value);
+                    const dataPagamento = dataPagamentoInput.value;
+
+                    docRef.update({
+                        fornecedorId: fornecedorId,
+                        codigoBarras: codigoBarras,
+                        dataVencimento: dataVencimento,
+                        valor: valor,
+                        dataPagamento: dataPagamento || null
+                    })
+                    .then(() => {
+                        
+                        console.log('Conta a pagar atualizada com sucesso:', id);
+                        carregarContasPagar()
+                        contasPagarForm.reset();
+                        carregarContasPagar(); // Recarregar a lista após a edição
+
+                        // Voltar ao modo de cadastro após a edição
+                        cadastrarButton.textContent = 'Cadastrar Conta';
+                        contasPagarForm.removeEventListener('submit', editarContaPagar);
+                        contasPagarForm.addEventListener('submit', cadastrarNovaConta);
+                    })
+                    .catch((error) => {
+                        console.error('Erro ao atualizar conta a pagar:', error);
                     });
                 });
-            });
-        }
-
-        // Função para excluir uma conta a pagar
-        function deleteConta(contaId) {
-            db.collection("contas_pagar").doc(contaId).delete().then(function () {
-                console.log("Conta excluída com sucesso!");
-                loadContasPagarTable();
-            }).catch(function (error) {
-                console.error("Erro ao excluir conta: ", error);
-            });
-        }
-
-        // Carrega as contas a pagar na tabela ao carregar a página
-        loadContasPagarTable();
-    </script>
-
-    <!-- Adicione o link para o Bootstrap JavaScript no final do body -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            } else {
+                console.error('Documento não encontrado para edição');
+            }
+        })
+        .catch((error) => {
+            console.error('Erro ao obter dados para edição:', error);
+        });
+    }
     
+    
+
+    
+    // Carregar a lista de fornecedores quando a página carregar
+    carregarFornecedores();
+
+    // Carregar a lista de contas a pagar quando a página carregar
+    carregarContasPagar();
+    
+    
+    
+        const sidebar = document.getElementById('sidebar');
+        const content = document.getElementById('content');
+        const toggleSidebar = document.getElementById('toggleSidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        toggleSidebar.addEventListener('click', () => {
+            sidebar.style.left = '0';
+            content.style.marginLeft = '180px'; // Adicionar margem ao conteúdo
+            toggleSidebar.style.visibility = 'hidden';
+        });
+
+        closeSidebar.addEventListener('click', () => {
+            sidebar.style.left = '-200px';
+            content.style.marginLeft = '0'; // Remover a margem do conteúdo
+            toggleSidebar.style.visibility = 'visible';
+        });
+        
+      
+        function showForm(formId) {
+            const forms = document.querySelectorAll('.form-container');
+            forms.forEach(form => {
+                form.style.display = 'none';
+            });
+            
+            const selectedForm = document.getElementById(formId);
+            selectedForm.style.display = 'block';
+        }
+        
+        
+    </script>
 </body>
-
-
 </html>
