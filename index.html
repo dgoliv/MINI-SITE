@@ -23,13 +23,15 @@
             transition: left 0.4s;
         }
         #content {
-        margin-left: 100px; /* Inicialmente, sem margem esquerda */
-        padding: 20px;
+        margin-left: 2px; /* Inicialmente, sem margem esquerda */
+        margin-right: 2px;
+        padding: 2px;
         transition: margin-left 0.3s;
         }
         
         .cards-container {
             display: flex;
+            
             justify-content: center;
             flex-wrap: wrap;
             gap: 5px; /* Espaço entre os cards */
@@ -87,13 +89,14 @@
         }
         #toggleSidebar {
             position: fixed;
-            top: 15px;
+            top: 1px;
             left: 1px;
             background-color: none;
             color: black;
             border: none;
-            padding: 2px;
+            padding: 8px;
             border-radius: 2px;
+            font-size: 22px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
