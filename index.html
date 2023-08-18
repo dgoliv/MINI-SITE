@@ -8,129 +8,250 @@
     
     <style>
     
-    /* Estilo para os cards */
-.card {
-    background-color: #f5f5f5; /* Cor de fundo */
-    border: none; /* Remover borda */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    margin-bottom: 15px; /* Espaçamento entre os cards */
-}
+        
+        
+        .cards-container {
+            display: flex;
+            
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px; /* Espaço entre os cards */
+            margin-top: 5px;
+            
+        }
+        
+        card {
+            height: 90px;
+            
+            
+            margin-bottom: 2px; /* Espaço entre os cards quando estão em linha */
+            margin-right: 2px; /* Espaço horizontal entre os cards */
+            text-align: center; /* Centralizar o texto */
+        }
+        
+        
+        h2 {
+            font-size: 22px;
+            text-align: center; /* Centralizar o texto */
+        }
+        
+         /* Estilos para os cards */
+        .card-1 {
+            background-color: #ff6961; /* Vermelho claro */
+            display: flex;
+            border: 10px; /* Remover borda */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            height: 90px;
+            margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
+            margin-right: 2px; /* Espaço horizontal entre os cards */
+            text-align: center; /* Centralizar o texto */
+            border-radius: 4px;
+           
+        }
+        
+        
+        .card-2 {
+            background-color: #ebf3a0; /* Verde claro */
+            border: 10px; /* Remover borda */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            height: 90px;
+            margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
+            margin-right: 2px; /* Espaço horizontal entre os cards */
+            text-align: center; /* Centralizar o texto */
+            border-radius: 4px;
+        }
 
-/* Estilo para os títulos dos cards */
-.card-title {
-    font-size: 1.2rem; /* Tamanho do título */
-    margin-bottom: 0.5rem; /* Espaçamento inferior */
-    color: #333; /* Cor do texto */
-}
+        .card-3 {
+            background-color: #98f6a9; /* Amarelo claro */
+            border: 10px; /* Remover borda */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            height: 90px;
+            margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
+            margin-right: 2px; /* Espaço horizontal entre os cards */
+            text-align: center; /* Centralizar o texto */
+            border-radius: 4px;
+        }
 
-/* Estilo para o texto dos cards */
-.card-text {
-    color: #777; /* Cor do texto secundário */
-}
+        .card-4 {
+            background-color: #84b6f4; /* Azul claro */
+            border: 10px; /* Remover borda */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            height: 90px;
+            margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
+            margin-right: 2px; /* Espaço horizontal entre os cards */
+            text-align: center; /* Centralizar o texto */
+            border-radius: 4px;
+        }
 
-/* Estilo para os botões dentro dos cards */
-.card .btn {
-    background-color: #007bff; /* Cor de fundo do botão */
-    color: #fff; /* Cor do texto do botão */
-    border: none; /* Remover borda do botão */
-    padding: 5px 10px; /* Espaçamento interno do botão */
-    font-size: 0.9rem; /* Tamanho da fonte do botão */
-    cursor: pointer; /* Cursor de apontar */
-}
-
-/* Estilo para os botões de edição */
-.card .btn-info {
-    background-color: #17a2b8; /* Cor de fundo do botão de edição */
-}
-
-/* Estilo para os botões de exclusão */
-.card .btn-danger {
-    background-color: #dc3545; /* Cor de fundo do botão de exclusão */
-}
-
-    
+        .card-5 {
+            background-color: #9b9b9b; /* Azul claro mais claro */
+            border: 10px; /* Remover borda */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            height: 90px;
+            margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
+            margin-right: 2px; /* Espaço horizontal entre os cards */
+            text-align: center; /* Centralizar o texto */
+            border-radius: 4px;
+        }
+        
+        .card-text {
+            font-size: 23px; /* Aumentar o tamanho da fonte dos números */
+            margin-top: -5px;
+            color: BLACK;
+        }
+        
+        /* Estilos para os botões neutros */
+        .btn-neutro {
+            background-color: #f8f9fa; /* Cinza claro */
+            color: #212529; /* Cor de texto padrão */
+        }
+        
+       #filtro-contas-pagar .text-right button {
+            margin-top: 10px; /* Adicione a margem acima do botão */
+            margin-bottom: 10px; /* Adicione a margem abaixo do botão */
+            
+        }
+        
     </style>
     
 </head>
 <body>
-    <div class="container mt-5">
+    
+    
+    
+    
+    <div class="container mt-3"> <!-- FORMULÁRIO GERAL -->
+  
         
+    <div id="cards-container" class="form-container"> <!-- FORMULÁRIO DOS CARDS -->
+    
+        <h2 class="mt-5">CONTROLE DE BOLETOS</h2>
         <div class="row mt-5">
-    <div class="col-md-3">
-        <div class="card">
+    <div class="col-md-4">
+        <div class="card-1">
             <div class="card-body">
-                <h5 class="card-title">Contas Vencidas</h5>
+                <h6 class="card-title">Contas Vencidas</h6>
                 <p class="card-text" id="contasVencidasCount">Carregando...</p>
             </div>
+            
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="card">
+    <div class="col-md-4">
+        <div class="card-2">
             <div class="card-body">
-                <h5 class="card-title">Contas para Hoje</h5>
+                <h6 class="card-title">Contas para Hoje</h6>
                 <p class="card-text" id="contasHojeCount">Carregando...</p>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="card">
+    <div class="col-md-4">
+        <div class="card-3">
             <div class="card-body">
-                <h5 class="card-title">Contas a Vencer</h5>
+                <h6 class="card-title">Contas a Vencer</h6>
                 <p class="card-text" id="contasAVencerCount">Carregando...</p>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-    <div class="card">
+    <div class="col-md-6">
+    <div class="card-4">
         <div class="card-body">
-            <h5 class="card-title">Contas Pagas</h5>
+            <h6 class="card-title">Contas Pagas</h6>
             <p class="card-text" id="contasPagasCount">Carregando...</p>
         </div>
     </div>
 </div>
 
-    <div class="col-md-3">
-        <div class="card">
+    <div class="col-md-6">
+        <div class="card-5">
             <div class="card-body">
-                <h5 class="card-title">Total de Contas</h5>
+                <h6 class="card-title">Total de Contas</h6>
                 <p class="card-text" id="totalContasCount">Carregando...</p>
             </div>
         </div>
     </div>
 </div>
 
+
+<!-- Botão "+" para abrir o formulário de cadastro de fornecedores -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastroModal" style="margin: 15px;"> 
+    +
+</button>
+
+
+<!-- Modal do Formulário de Cadastro de Fornecedores -->
+<div class="modal fade" id="cadastroModal" tabindex="-1" role="dialog" aria-labelledby="cadastroModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cadastroModalLabel">Cadastro de Fornecedores</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="cadastroForm">
+                    <div class="form-group">
+                        <label for="fornecedor">Fornecedor:</label>
+                        <input type="text" class="form-control" id="fornecedor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vendedor">Vendedor:</label>
+                        <input type="text" class="form-control" id="vendedor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Telefone:</label>
+                        <input type="text" class="form-control" id="telefone" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="cadastrarBtn">Cadastrar Fornecedor</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Formulário de Cadastro de Fornecedores -->
+        <div id="fornecedor-form" class="form-container">
         
-        <h2>Cadastro de Fornecedores</h2>
-        <form id="cadastroForm">
-            <div class="form-group">
-                <label for="fornecedor">Fornecedor:</label>
-                <input type="text" class="form-control" id="fornecedor" required>
-            </div>
-            <div class="form-group">
-                <label for="vendedor">Vendedor:</label>
-                <input type="text" class="form-control" id="vendedor" required>
-            </div>
-            <div class="form-group">
-                <label for="telefone">Telefone:</label>
-                <input type="text" class="form-control" id="telefone" required>
-            </div>
-            <button type="submit" class="btn btn-primary" id="cadastrarBtn">Cadastrar Fornecedor</button>
-        </form>
+       
         
+        
+            
         <div class="form-group mt-3">
     <label for="filtroFornecedores">Pesquisar Fornecedores:</label>
     <input type="text" class="form-control" id="filtroFornecedores" placeholder="Digite o nome do fornecedor" oninput="filtrarFornecedores()">
     </div>
+ </div>
 
         
-        <h2 class="mt-5">Lista de Fornecedores</h2>
+        <h2 class="mt-5">FORNECEDORES</h2>
         <ul id="fornecedoresList" class="list-group">
             <!-- Lista de fornecedores será exibida aqui -->
         </ul>
+    </div>
     
     
-    <form id="contasPagarForm">
-    <div class="form-group">
+     <!-- Formulário de Contas à Pagar -->
+        <div id="contas-pagar-form" class="form-container">
+            
+        
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contasPagarModal" style="margin: 15px;">
+            +
+        </button>
+        
+        <!-- Modal do Formulário de Cadastro de Contas a Pagar -->
+        <div class="modal fade" id="contasPagarModal" tabindex="-1" role="dialog" aria-labelledby="contasPagarModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="contasPagarModalLabel">Cadastro de Contas a Pagar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="contasPagarForm">
+                         <div class="form-group">
         <label for="fornecedorSelect">Fornecedor:</label>
         <select class="form-control" id="fornecedorSelect" required>
             <!-- Opções de fornecedores serão carregadas aqui -->
@@ -154,32 +275,52 @@
     </div>
     <button type="submit" class="btn btn-primary">Cadastrar Conta</button>
 </form>
-
-<div class="form-group mt-3">
-<label for="dataVencimentoInicial">Data de Vencimento Inicial:</label>
-<input type="date" class="form-control" id="dataVencimentoInicial">
-
-<label for="dataVencimentoFinal">Data de Vencimento Final:</label>
-<input type="date" class="form-control" id="dataVencimentoFinal">
-
-<label for="dataPagamentoInicial">Data de Pagamento Inicial:</label>
-<input type="date" class="form-control" id="dataPagamentoInicial">
-
-<label for="dataPagamentoFinal">Data de Pagamento Final:</label>
-<input type="date" class="form-control" id="dataPagamentoFinal">
-
-
-<button type="button" class="btn btn-primary mt-2" id="filtrarContasBtn">Filtrar Contas</button>
-
-
-
-<ul id="contasPagarList" class="list-group">
-    <!-- Lista de contas a pagar será exibida aqui -->
-</ul>
-
-
+                        
+        </div>
+    </div>
+</div>
 </div>
 
+            
+   
+<div id="filtro-contas-pagar" class="form-container">
+    <div class="form-group mt-3">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="dataVencimentoInicial" class="small">Data de Vencimento Inicial:</label>
+                <input type="date" class="form-control" id="dataVencimentoInicial">
+            </div>
+            <div class="col-md-6">
+                <label for="dataVencimentoFinal" class="small">Data de Vencimento Final:</label>
+                <input type="date" class="form-control" id="dataVencimentoFinal">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <label for="dataPagamentoInicial" class="small">Data de Pagamento Inicial:</label>
+                <input type="date" class="form-control" id="dataPagamentoInicial">
+            </div>
+            <div class="col-md-6">
+                <label for="dataPagamentoFinal" class="small">Data de Pagamento Final:</label>
+                <input type="date" class="form-control" id="dataPagamentoFinal">
+            </div>
+        </div>
+
+        <div class="text-right mt-2"> <!-- Alinha o botão ao lado direito -->
+            <button type="button" class="btn btn-primary" id="filtrarContasBtn">Filtrar Contas</button>
+        </div>
+        
+        <h2 class="mt-5">BOLETOS</h2>
+        <ul id="contasPagarList" class="list-group">
+            <!-- Lista de contas a pagar será exibida aqui -->
+        </ul>
+ 
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script>
@@ -255,8 +396,8 @@
                     <strong>Vendedor:</strong> ${data.vendedor}<br>
                     <strong>Telefone:</strong> ${data.telefone}<br>
                     
-                    <button class="btn btn-sm btn-info ml-2 editar-btn" data-id="${doc.id}">Editar</button>
-                    <button class="btn btn-sm btn-danger ml-2 excluir-btn" data-id="${doc.id}">Excluir</button>
+                    <button class="btn btn-sm btn-info ml-2 btn-neutro editar-btn" data-id="${doc.id}">Editar</button>
+                    <button class="btn btn-sm btn-danger ml-2 btn-neutro excluir-btn" data-id="${doc.id}">Excluir</button>
                 `;
                 fornecedoresList.appendChild(listItem);
             });
@@ -353,8 +494,8 @@
             <strong>Data de Vencimento:</strong> ${dataVencimentoFormatada}<br>
             <strong>Valor:</strong> R$ ${data.valor.toFixed(2)}<br>
             <strong>Data de Pagamento:</strong> ${dataPagamentoFormatada}<br>
-            <button class="btn btn-sm btn-info ml-2 editar-conta-btn" data-id="${doc.id}">Editar</button>
-            <button class="btn btn-sm btn-danger ml-2 excluir-conta-btn" data-id="${doc.id}">Excluir</button>
+            <button class="btn btn-sm btn-info ml-2 btn-neutro editar-conta-btn" data-id="${doc.id}">Editar</button>
+            <button class="btn btn-sm btn-danger ml-2 btn-neutro excluir-conta-btn" data-id="${doc.id}">Excluir</button>
         `;
         contasPagarList.appendChild(listItem);
     });
@@ -423,7 +564,7 @@ db.collection('contasPagar').onSnapshot(snapshot => {
     const totalContas = totalContasVencidas + totalContasHoje + totalContasAVencer + totalContasPagas;
 
     document.getElementById('contasVencidasCount').textContent = `R$ ${totalContasVencidas.toFixed(2)}`;
-    document.getElementById('contasHojeCount').textContent = `R$ ${totalContasHoje.toFixed(2)} (${formatarData(hoje)})`;
+    document.getElementById('contasHojeCount').textContent = `R$ ${totalContasHoje.toFixed(2)}`;
     document.getElementById('contasAVencerCount').textContent = `R$ ${totalContasAVencer.toFixed(2)}`;
     document.getElementById('totalContasCount').textContent = `R$ ${totalContas.toFixed(2)}`;
     document.getElementById('contasPagasCount').textContent = `R$ ${totalContasPagas.toFixed(2)}`;
