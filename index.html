@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Cadastro de Fornecedores</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
     
     <style>
     
-        
+        body {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    /* Seletor universal para aplicar a fonte a todos os elementos de texto */
+    * {
+        font-family: 'Roboto', sans-serif;
+    }
         
         .cards-container {
             display: flex;
@@ -25,13 +36,14 @@
             
             
             margin-bottom: 2px; /* Espaço entre os cards quando estão em linha */
-            margin-right: 2px; /* Espaço horizontal entre os cards */
+            margin-right: -5px; /* Espaço horizontal entre os cards */
             text-align: center; /* Centralizar o texto */
         }
         
         
         h2 {
-            font-size: 22px;
+            font-size: 25px;
+            font-family: 'Roboto', sans-serif;
             text-align: center; /* Centralizar o texto */
         }
         
@@ -51,7 +63,7 @@
         
         
         .card-2 {
-            background-color: #ebf3a0; /* Verde claro */
+            background-color: #ffe453; /* Verde claro */
             border: 10px; /* Remover borda */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             height: 90px;
@@ -62,7 +74,7 @@
         }
 
         .card-3 {
-            background-color: #98f6a9; /* Amarelo claro */
+            background-color: #7afb5d; /* Amarelo claro */
             border: 10px; /* Remover borda */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             height: 90px;
@@ -84,7 +96,7 @@
         }
 
         .card-5 {
-            background-color: #9b9b9b; /* Azul claro mais claro */
+            background-color: #b4b4b4; /* Azul claro mais claro */
             border: 10px; /* Remover borda */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             height: 90px;
@@ -95,15 +107,18 @@
         }
         
         .card-text {
-            font-size: 23px; /* Aumentar o tamanho da fonte dos números */
-            margin-top: -5px;
-            color: BLACK;
+            font-size: 28px; /* Aumentar o tamanho da fonte dos números */
+            margin-top: -9.5px;
+            font-family: 'Roboto', sans-serif;
+            color: #323232;
+            font-weight: bold;
         }
         
         /* Estilos para os botões neutros */
         .btn-neutro {
             background-color: #f8f9fa; /* Cinza claro */
             color: #212529; /* Cor de texto padrão */
+            margin-right: 5px;
         }
         
        #filtro-contas-pagar .text-right button {
@@ -111,6 +126,39 @@
             margin-bottom: 10px; /* Adicione a margem abaixo do botão */
             
         }
+         /* Novo estilo para posicionar os botões "Editar" e "Excluir" à direita */
+        .editar-excluir-buttons {
+        display: flex;
+        
+        justify-content: flex-end; /* Alinhar à direita */
+        margin-top: -50px; /* Ajustar o espaçamento superior para subir mais os botões */
+        margin-bottom: 25px;
+        }
+
+        /* Posicionamento vertical */
+        .editar-excluir-dropdown {
+        display: flex;
+        justify-content: flex-end; /* Alinhar à direita */
+        margin-top: -70px; /* Ajustar o espaçamento superior para subir mais os botões */
+        margin-bottom: 25px;
+        }
+        
+        /* Espaçamento entre os botões no dropdown */
+        /* Alinhar a lista de itens do dropdown à direita */
+        .dropdown-menu.dropdown-menu-right {
+            right: 0;
+            left: auto;
+        }
+        
+        .editar-excluir-dropdown {
+        display: flex;
+        justify-content: flex-end; /* Alinhar à direita */
+        margin-top: -60px; /* Ajustar o espaçamento superior para subir mais os botões */
+        margin-bottom: 35px;
+        
+        
+        }
+        
         
     </style>
     
@@ -125,8 +173,8 @@
         
     <div id="cards-container" class="form-container"> <!-- FORMULÁRIO DOS CARDS -->
     
-        <h2 class="mt-5">CONTROLE DE BOLETOS</h2>
-        <div class="row mt-5">
+        <h2 class="mt-6">CONTROLE DE BOLETOS</h2>
+        <div class="row mt-6">
     <div class="col-md-4">
         <div class="card-1">
             <div class="card-body">
@@ -152,7 +200,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
     <div class="card-4">
         <div class="card-body">
             <h6 class="card-title">Contas Pagas</h6>
@@ -161,7 +209,7 @@
     </div>
 </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="card-5">
             <div class="card-body">
                 <h6 class="card-title">Total de Contas</h6>
@@ -174,7 +222,7 @@
 
 <!-- Botão "+" para abrir o formulário de cadastro de fornecedores -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastroModal" style="margin: 15px;"> 
-    +
+    ✚
 </button>
 
 
@@ -226,8 +274,20 @@
         
         <h2 class="mt-5">FORNECEDORES</h2>
         <ul id="fornecedoresList" class="list-group">
-            <!-- Lista de fornecedores será exibida aqui -->
-        </ul>
+    <!-- Lista de fornecedores será exibida aqui -->
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+            <strong>Fornecedor:</strong> <span class="fornecedor-nome"></span><br>
+            <strong>Vendedor:</strong> <span class="fornecedor-vendedor"></span><br>
+            <strong>Telefone:</strong> <span class="fornecedor-telefone"></span><br>
+        </div>
+        <div>
+            <button class="btn btn-sm btn-info ml-2 btn-neutro editar-btn" data-id="">Editar</button>
+            <button class="btn btn-sm btn-danger ml-2 btn-neutro excluir-btn" data-id="">Excluir</button>
+        </div>
+    </li>
+</ul>
+
     </div>
     
     
@@ -236,7 +296,7 @@
             
         
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contasPagarModal" style="margin: 15px;">
-            +
+            ✚
         </button>
         
         <!-- Modal do Formulário de Cadastro de Contas a Pagar -->
@@ -286,28 +346,29 @@
 <div id="filtro-contas-pagar" class="form-container">
     <div class="form-group mt-3">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12">
                 <label for="dataVencimentoInicial" class="small">Data de Vencimento Inicial:</label>
                 <input type="date" class="form-control" id="dataVencimentoInicial">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12">
                 <label for="dataVencimentoFinal" class="small">Data de Vencimento Final:</label>
                 <input type="date" class="form-control" id="dataVencimentoFinal">
             </div>
         </div>
         
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12">
                 <label for="dataPagamentoInicial" class="small">Data de Pagamento Inicial:</label>
                 <input type="date" class="form-control" id="dataPagamentoInicial">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12">
                 <label for="dataPagamentoFinal" class="small">Data de Pagamento Final:</label>
                 <input type="date" class="form-control" id="dataPagamentoFinal">
             </div>
         </div>
 
         <div class="text-right mt-2"> <!-- Alinha o botão ao lado direito -->
+            <button id="limparCamposButton" class="btn btn-primary" onclick="limparCampos()" >Limpar</button>
             <button type="button" class="btn btn-primary" id="filtrarContasBtn">Filtrar Contas</button>
         </div>
         
@@ -376,6 +437,8 @@
             }
 
             cadastroForm.reset();
+            $('#cadastroModal').modal('hide'); // Fechar o modal após cadastrar ou editar
+
         });
 
         db.collection('fornecedores').onSnapshot(snapshot => {
@@ -383,6 +446,7 @@
         fornecedoresList.innerHTML = '';
         snapshot.forEach(doc => {
         const data = doc.data();
+        const fornecedoresList = document.getElementById('fornecedoresList');
         const option = document.createElement('option');
         option.textContent = data.fornecedor;
         fornecedorSelect.appendChild(option);
@@ -390,15 +454,31 @@
         listItem.classList.add('list-group-item');
         listItem.innerHTML = `
                     
-                    
+                    <div>
                     <strong>Fornecedor:</strong>
                     <strong class="fornecedor-nome">${data.fornecedor}</strong><br>
                     <strong>Vendedor:</strong> ${data.vendedor}<br>
-                    <strong>Telefone:</strong> ${data.telefone}<br>
+                    <strong>Telefone:</strong> ${data.telefone}
                     
-                    <button class="btn btn-sm btn-info ml-2 btn-neutro editar-btn" data-id="${doc.id}">Editar</button>
-                    <button class="btn btn-sm btn-danger ml-2 btn-neutro excluir-btn" data-id="${doc.id}">Excluir</button>
-                `;
+                    <div class="dropdown editar-excluir-dropdown">
+        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="editarExcluirDropdown_${doc.id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-flip="false">
+            
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="editarExcluirDropdown_${doc.id}">
+            <button class="dropdown-item editar-btn" data-id="${doc.id}">✎ Editar</button>
+            <button class="dropdown-item excluir-btn" data-id="${doc.id}">✘ Excluir</button>
+        </div>
+    </div>
+`;
+
+// Adicionar evento de clique para abrir o dropdown ao clicar no botão "Ações"
+const dropdownButton = listItem.querySelector(`#editarExcluirDropdown_${doc.id}`);
+const dropdownMenu = listItem.querySelector(`#editarExcluirDropdown_${doc.id} + .dropdown-menu`);
+
+dropdownButton.addEventListener('click', () => {
+    dropdownMenu.classList.toggle('show');
+});
+                
                 fornecedoresList.appendChild(listItem);
             });
 
@@ -415,6 +495,13 @@
                     document.getElementById('vendedor').value = data.vendedor;
                     document.getElementById('telefone').value = data.telefone;
                     cadastrarBtn.textContent = "Salvar Edições";
+                    
+                    // Fechar o dropdown após clicar em "Editar"
+                    const dropdown = btn.closest('.dropdown');
+                    const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+                    dropdownToggle.click();
+                 // Abrir o modal de cadastro de fornecedores
+                    $('#cadastroModal').modal('show');
                 });
             });
 
@@ -422,6 +509,11 @@
                 btn.addEventListener('click', (e) => {
                     const id = e.target.getAttribute('data-id');
                     db.collection('fornecedores').doc(id).delete();
+                    
+                    const dropdown = btn.closest('.dropdown');
+                    const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+                    dropdownToggle.click();
+                    
                 });
             });
             
@@ -437,8 +529,7 @@
 
 
     
-
-    if (editingItemIdConta) {
+if (editingItemIdConta) {
         await db.collection('contasPagar').doc(editingItemIdConta).update({
             fornecedorId,
             codigo,
@@ -449,6 +540,9 @@
 
         cadastrarContaBtn.textContent = "Cadastrar Conta";
         editingItemIdConta = null;
+
+        
+        $('#contasPagarModal').modal('hide');
     } else {
         await db.collection('contasPagar').add({
             fornecedorId,
@@ -460,6 +554,7 @@
     }
 
     contasPagarForm.reset();
+    $('#contasPagarModal').modal('hide');
 });
 
             
@@ -489,15 +584,59 @@
         listItem.setAttribute('data-vencimento', data.vencimento); // Adicionar o atributo data-vencimento
         listItem.setAttribute('data-pagamento', data.pagamento || ''); // Adicionar o atributo data-pagamento (ou vazio se não houver pagamento)
         listItem.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center">
+        <div>
             <strong>Fornecedor:</strong> ${data.fornecedorId}<br>
             <strong>Código de Barras:</strong> ${data.codigo}<br>
             <strong>Data de Vencimento:</strong> ${dataVencimentoFormatada}<br>
             <strong>Valor:</strong> R$ ${data.valor.toFixed(2)}<br>
             <strong>Data de Pagamento:</strong> ${dataPagamentoFormatada}<br>
-            <button class="btn btn-sm btn-info ml-2 btn-neutro editar-conta-btn" data-id="${doc.id}">Editar</button>
-            <button class="btn btn-sm btn-danger ml-2 btn-neutro excluir-conta-btn" data-id="${doc.id}">Excluir</button>
-        `;
+            </div>
+            <div class="dropdown editar-excluir-dropdown">
+                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdown_${doc.id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-flip="false">
+                    
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_${doc.id}">
+                    <button class="dropdown-item editar-conta-btn" data-id="${doc.id}">✎ Editar</button>
+                    <button class="dropdown-item excluir-conta-btn" data-id="${doc.id}">✘  Excluir</button>
+                </div>
+            </div>
+        </div>
+    `;
         contasPagarList.appendChild(listItem);
+        
+        // Adicionar evento de clique no botão "Ações" para abrir o dropdown
+    const dropdownButton = listItem.querySelector(`#dropdown_${doc.id}`);
+    const dropdownMenu = listItem.querySelector(`#dropdown_${doc.id} + .dropdown-menu`);
+    dropdownButton.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('show');
+        // Abre o modal de cadastro/edição
+        
+        
+    });
+        
+    // Adicionar evento de clique no botão "Editar"
+    const editarBtn = listItem.querySelector('.editar-conta-btn');
+    editarBtn.addEventListener('click', () => {
+        const contaId = editarBtn.getAttribute('data-id');
+        dropdownMenu.classList.toggle('show');
+        $('#contasPagarModal').modal('show');
+        
+        
+        
+        abrirFormularioEdicao(contaId); // Função para abrir o formulário de edição
+        
+        
+    });
+
+    // Adicionar evento de clique no botão "Excluir"
+    const excluirBtn = listItem.querySelector('.excluir-conta-btn');
+    excluirBtn.addEventListener('click', () => {
+        const contaId = excluirBtn.getAttribute('data-id');
+        // Lógica para confirmar a exclusão da conta com o ID e excluir
+        console.log(`Excluir conta com ID ${contaId}`);
+    });
+        
     });
 
    const editarContaButtons = document.querySelectorAll('.editar-conta-btn');
@@ -515,6 +654,8 @@
             valor.value = data.valor;
             dataPagamento.value = data.pagamento;
             cadastrarContaBtn.textContent = "Salvar Edições";
+      
+            
         });
     });
 
@@ -524,6 +665,10 @@
             await db.collection('contasPagar').doc(id).delete();
         });
     });
+    
+    
+        
+    
     
     // Atualizar os cards no topo com informações sobre os valores das contas
 // Função para formatar a data em formato pt-BR
@@ -596,6 +741,15 @@ document.getElementById('filtroFornecedores').addEventListener('input', filtrarF
 
 
 });
+
+// Função para limpar os campos de data
+    function limparCampos() {
+        dataVencimentoInicial.value = '';
+        dataVencimentoFinal.value = '';
+        dataPagamentoInicial.value = '';
+        dataPagamentoFinal.value = '';
+        
+    }
 
 
 // Selecionar os elementos de input para as datas de vencimento e pagamento
