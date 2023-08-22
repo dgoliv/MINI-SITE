@@ -19,6 +19,7 @@
     /* Seletor universal para aplicar a fonte a todos os elementos de texto */
     * {
         font-family: 'Roboto', sans-serif;
+        font-size: 12px;
     }
         
         .cards-container {
@@ -37,7 +38,7 @@
         
         
         h2 {
-            font-size: 27px;
+            font-size: 25px;
             font-family: 'Roboto', sans-serif;
             text-align: center; /* Centralizar o texto */
             margin-top: 30px;
@@ -45,10 +46,10 @@
         }
         
         h6 {
-            font-size: 14px;
+            font-size: 13px;
             font-family: 'Roboto', sans-serif;
             text-align: center; /* Centralizar o texto */
-            margin-top: -10px;
+            margin-top: -6px;
             
            
         }
@@ -61,7 +62,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             height: 62px;
             margin-bottom: 2px; /* Espaço entre os cards quando estão em linha */
-            margin-right: -12px; /* Espaço horizontal entre os cards */
+            margin-right: -13px; /* Espaço horizontal entre os cards */
             margin-left: -12px; /* Espaço horizontal entre os cards */
             text-align: center; /* Centralizar o texto */
             border-radius: 4px;
@@ -75,7 +76,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             height: 62px;
             margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
-            margin-right: -12px; /* Espaço horizontal entre os cards */
+            margin-right: -13px; /* Espaço horizontal entre os cards */
             margin-left: -12px; /* Espaço horizontal entre os cards */
             text-align: center; /* Centralizar o texto */
             border-radius: 4px;
@@ -87,7 +88,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             height: 62px;
             margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
-            margin-right: -12px; /* Espaço horizontal entre os cards */
+            margin-right: -13px; /* Espaço horizontal entre os cards */
             margin-left: -12px; /* Espaço horizontal entre os cards */
             text-align: center; /* Centralizar o texto */
             border-radius: 4px;
@@ -99,7 +100,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             height: 62px;
             margin-bottom: 2px; /* Espaço entre os cards quando estão em linha */
-            margin-right: -12px; /* Espaço horizontal entre os cards */
+            margin-right: -13px; /* Espaço horizontal entre os cards */
             margin-left: -12px; /* Espaço horizontal entre os cards */
             text-align: center; /* Centralizar o texto */
             border-radius: 4px;
@@ -111,7 +112,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             height: 62px;
             margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
-            margin-right: -12px; /* Espaço horizontal entre os cards */
+            margin-right: -13px; /* Espaço horizontal entre os cards */
             margin-left: -12px; /* Espaço horizontal entre os cards */
             text-align: center; /* Centralizar o texto */
             border-radius: 4px;
@@ -123,10 +124,29 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             height: 62px;
             margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
-            margin-right: -12px; /* Espaço horizontal entre os cards */
+            margin-right: -13px; /* Espaço horizontal entre os cards */
             margin-left: -12px; /* Espaço horizontal entre os cards */
             text-align: center; /* Centralizar o texto */
             border-radius: 4px;
+        }
+        
+        .itens-dlist {
+            font-size: 12px; /* Aumentar o tamanho da fonte dos números */
+            
+        }
+        
+        .itens-flist {
+            font-size: 12px; /* Aumentar o tamanho da fonte dos números */
+            
+        }
+        
+        .itens-dropList {
+            font-size: 12px; /* Aumentar o tamanho da fonte dos números */
+            
+        }
+        .itens-dropList2 {
+            font-size: 12px; /* Aumentar o tamanho da fonte dos números */
+            
         }
         
         .card-text {
@@ -135,9 +155,10 @@
             font-family: 'Roboto', sans-serif;
             color: #323232;
             font-weight: bold;
-            margin-bottom: -20px;
+            margin-top: 0px;
+            margin-bottom: 1px;
             margin-right: -17px; /* Espaço horizontal entre os cards */
-            margin-left: -16px; /* Espaço horizontal entre os cards */
+            margin-left: -14px; /* Espaço horizontal entre os cards */
         }
         
         /* Estilos para os botões neutros */
@@ -156,6 +177,7 @@
         .editar-excluir-buttons {
         display: flex;
         
+        
         justify-content: flex-end; /* Alinhar à direita */
         margin-top: -50px; /* Ajustar o espaçamento superior para subir mais os botões */
         margin-bottom: 25px;
@@ -173,20 +195,27 @@
         .editar-excluir-dropdown {
         display: flex;
         justify-content: flex-end; /* Alinhar à direita */
-        margin-top: -60px; /* Ajustar o espaçamento superior para subir mais os botões */
-        margin-bottom: 30px;
-        left:10px;
-        top: -15px;
+        margin-top: -35px; /* Ajustar o espaçamento superior para subir mais os botões */
+        margin-bottom: 5px;
+        left: 0px;
+        right: 10px;
+        top: 45px;
+        position: absolute;
+        height: 25px;
+        color: white;
         
         
         }
         .editar-excluir-dropdown2 {
         display: flex;
         justify-content: flex-end; /* Alinhar à direita */
-        margin-top: -60px; /* Ajustar o espaçamento superior para subir mais os botões */
-        margin-bottom: 30px;
-        left:10px;
-        top: -2px;
+        margin-top: -35px; /* Ajustar o espaçamento superior para subir mais os botões */
+        margin-bottom: 5px;
+        left: 0px;
+        right: 10px;
+        top: 45px;
+        position: absolute;
+        height: 25px;
         
         }
         .form-containerB {
@@ -195,6 +224,7 @@
         justify-content: space-between;
         margin-bottom: 15px;
         margin-left: -16px;
+        
         }
 
       
@@ -497,7 +527,7 @@
         listItem.classList.add('list-group-item');
         listItem.innerHTML = `
                     
-                    <div>
+                    <div class="itens-flist">
                     <strong>Fornecedor:</strong>
                     <strong class="fornecedor-nome">${data.fornecedor}</strong><br>
                     <strong>Vendedor:</strong> ${data.vendedor}<br>
@@ -507,10 +537,13 @@
         <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="editarExcluirDropdown_${doc.id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-flip="false">
             
         </button>
+        
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="editarExcluirDropdown_${doc.id}">
+            <div class="itens-dropList">
             <button class="dropdown-item editar-btn" data-id="${doc.id}">✎ Editar</button>
             <button class="dropdown-item excluir-btn" data-id="${doc.id}">✘ Excluir</button>
         </div>
+    </div>
     </div>
 `;
 
@@ -560,7 +593,8 @@ dropdownButton.addEventListener('click', () => {
                 });
             });
             
-            contasPagarForm.addEventListener('submit', async (e) => {
+            // Função para cadastrar ou editar uma conta a pagar
+contasPagarForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const fornecedorId = fornecedorSelect.value;
@@ -568,11 +602,16 @@ dropdownButton.addEventListener('click', () => {
     const vencimento = dataVencimento.value;
     const valorConta = parseFloat(valor.value);
     const pagamento = dataPagamento.value;
-   
 
+    // Verificar se já existe uma conta com o mesmo código de barras
+    const existingConta = await db.collection('contasPagar').where('codigo', '==', codigo).get();
 
-    
-if (editingItemIdConta) {
+    if (existingConta.size > 0 && !editingItemIdConta) {
+        alert('Já existe uma conta com o mesmo código de barras. Por favor, verifique o código e tente novamente.');
+        return;
+    }
+
+    if (editingItemIdConta) {
         await db.collection('contasPagar').doc(editingItemIdConta).update({
             fornecedorId,
             codigo,
@@ -584,7 +623,6 @@ if (editingItemIdConta) {
         cadastrarContaBtn.textContent = "Cadastrar Conta";
         editingItemIdConta = null;
 
-        
         $('#contasPagarModal').modal('hide');
     } else {
         await db.collection('contasPagar').add({
@@ -628,7 +666,7 @@ if (editingItemIdConta) {
         listItem.setAttribute('data-pagamento', data.pagamento || ''); // Adicionar o atributo data-pagamento (ou vazio se não houver pagamento)
         listItem.innerHTML = `
         <div class="d-flex justify-content-between align-items-center">
-        <div>
+        <div class="itens-dlist">
             <strong>Fornecedor:</strong>
             <strong class="nome-fornecedor">${data.fornecedorId}</strong><br>
             <strong>Código de Barras:</strong> ${data.codigo}<br>
@@ -637,11 +675,13 @@ if (editingItemIdConta) {
             <class="item-valor">${data.valor.toFixed(2)}<br>
             <strong>Data de Pagamento:</strong> ${dataPagamentoFormatada}<br>
             </div>
+            </div>
             <div class="dropdown editar-excluir-dropdown2">
                 <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdown_${doc.id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-flip="false">
                     
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_${doc.id}">
+                    <div class="itens-dropList2">
                     <button class="dropdown-item editar-conta-btn" data-id="${doc.id}">✎ Editar</button>
                     <button class="dropdown-item excluir-conta-btn" data-id="${doc.id}">✘  Excluir</button>
                 </div>
@@ -678,6 +718,8 @@ if (editingItemIdConta) {
     const excluirBtn = listItem.querySelector('.excluir-conta-btn');
     excluirBtn.addEventListener('click', () => {
         const contaId = excluirBtn.getAttribute('data-id');
+        alert('Desjea realmente excluir?');
+        return;
         // Lógica para confirmar a exclusão da conta com o ID e excluir
         console.log(`Excluir conta com ID ${contaId}`);
     });
