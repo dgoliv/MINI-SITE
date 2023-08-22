@@ -21,6 +21,8 @@
         font-family: 'Roboto', sans-serif;
         font-size: 12px;
     }
+    
+    
         
         .cards-container {
             display: flex;
@@ -38,10 +40,10 @@
         
         
         h2 {
-            font-size: 25px;
+            font-size: 20px;
             font-family: 'Roboto', sans-serif;
             text-align: center; /* Centralizar o texto */
-            margin-top: 30px;
+            margin-top: 60px;
             margin-bottom: 12px;
         }
         
@@ -226,7 +228,41 @@
         margin-left: -16px;
         
         }
+        .navbar {
+           background-color: blue; /* Cor de fundo azul */
+        }
+        
+        .navbar-brand {
+            text-align: center;
+            width: 100%;
+            align-items: center;
+            font-size: 22px;
+            font-weight: 700;
+            font-family: 'Roboto', sans-serif;
+            color: white; /* Cor do texto "Sistema de Controle" */
+            
+        }
 
+      
+        
+       
+        /* Estilo para centralizar os nomes dos menus */
+        .navbar-nav .nav-link {
+            text-align: center;
+            width: 100%;
+        }
+        
+       
+        .navbar-toggler {
+         margin-top: -42px; /* Ajustar o espaçamento superior para subir mais os botões */
+        margin-bottom: 0px;
+        margin-right: 0px;
+        margin-left: 90%;
+        
+        
+            
+            
+        }
       
         
         
@@ -238,12 +274,29 @@
     
     
     
-    <div class="container md-3"> <!-- FORMULÁRIO GERAL -->
+    
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <b class="navbar-brand" href="#">CONTROLE DE BOLETOS</b>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="exibirFormulario('form1')">Boletos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="exibirFormulario('form2')">Fornecedores</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
   
-        
+       <div class="container md-3"> <!-- FORMULÁRIO GERAL -->  
     <div id="cards-container" class="form-container"> <!-- FORMULÁRIO DOS CARDS -->
     
-        <h2 class="mt-6 mb-3">CONTROLE DE BOLETOS</h2>
+        <p class="mt-6 mb-3"></p>
         <div class="row mt-6">
     <div class="col-4">
         <div class="card-1">
@@ -298,72 +351,9 @@
 </div>
 
 
-<!-- Modal do Formulário de Cadastro de Fornecedores -->
-<div class="modal fade" id="cadastroModal" tabindex="-1" role="dialog" aria-labelledby="cadastroModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cadastroModalLabel">Cadastro de Fornecedores</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="cadastroForm">
-                    <div class="form-group">
-                        <label for="fornecedor">Fornecedor:</label>
-                        <input type="text" class="form-control" id="fornecedor" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="vendedor">Vendedor:</label>
-                        <input type="text" class="form-control" id="vendedor" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefone">Telefone:</label>
-                        <input type="text" class="form-control" id="telefone" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="cadastrarBtn">Cadastrar Fornecedor</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
-        <h2 class="mt-5">FORNECEDORES</h2>
-
-        <!-- Formulário de Cadastro de Fornecedores -->
-        <div id="fornecedor-form" class="form-container">
-        <div class="form-containerB">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastroModal" style="margin: 15px;">✚</button>
-    <input type="text" class="form-control" id="filtroFornecedores" placeholder="Digite o nome do fornecedor" oninput="filtrarFornecedores()">
-</div>
-
- </div>
-
-        <ul id="fornecedoresList" class="list-group">
-    <!-- Lista de fornecedores será exibida aqui -->
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        <div>
-            <strong>Fornecedor:</strong> <span class="fornecedor-nome"></span><br>
-            <strong>Vendedor:</strong> <span class="fornecedor-vendedor"></span><br>
-            <strong>Telefone:</strong> <span class="fornecedor-telefone"></span><br>
-        </div>
-        <div>
-            <button class="btn btn-sm btn-info ml-2 btn-neutro editar-btn" data-id="">Editar</button>
-            <button class="btn btn-sm btn-danger ml-2 btn-neutro excluir-btn" data-id="">Excluir</button>
-        </div>
-    </li>
-</ul>
-
-    </div>
-    
-    
-     <!-- Formulário de Contas à Pagar -->
+                     <!-- BOLETOS -->
         <div id="contas-pagar-form" class="form-container">
-            
-        
-        
-        
         <!-- Modal do Formulário de Cadastro de Contas a Pagar -->
         <div class="modal fade" id="contasPagarModal" tabindex="-1" role="dialog" aria-labelledby="contasPagarModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -450,7 +440,74 @@
             <!-- Lista de contas a pagar será exibida aqui -->
         </ul>
  
+</div>
+</div>
+</div>
+<div
+<!-- Formulário de Cadastro de Fornecedores -->
+        <div id="fornecedor-form" class="form-container">
 
+<!-- Modal do Formulário de Cadastro de Fornecedores -->
+<div class="modal fade" id="cadastroModal" tabindex="-1" role="dialog" aria-labelledby="cadastroModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cadastroModalLabel">Cadastro de Fornecedores</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="cadastroForm">
+                    <div class="form-group">
+                        <label for="fornecedor">Fornecedor:</label>
+                        <input type="text" class="form-control" id="fornecedor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vendedor">Vendedor:</label>
+                        <input type="text" class="form-control" id="vendedor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Telefone:</label>
+                        <input type="text" class="form-control" id="telefone" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="cadastrarBtn">Cadastrar Fornecedor</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+       
+
+        
+        <h2 class="mt-5">FORNECEDORES</h2>
+
+        <div class="form-containerB">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastroModal" style="margin: 15px;">✚</button>
+    <input type="text" class="form-control" id="filtroFornecedores" placeholder="Digite o nome do fornecedor" oninput="filtrarFornecedores()">
+</div>
+
+ 
+    <div
+        <ul id="fornecedoresList" class="list-group">
+    <!-- Lista de fornecedores será exibida aqui -->
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+            <strong>Fornecedor:</strong> <span class="fornecedor-nome"></span><br>
+            <strong>Vendedor:</strong> <span class="fornecedor-vendedor"></span><br>
+            <strong>Telefone:</strong> <span class="fornecedor-telefone"></span><br>
+        </div>
+        <div>
+            <button class="btn btn-sm btn-info ml-2 btn-neutro editar-btn" data-id="">Editar</button>
+            <button class="btn btn-sm btn-danger ml-2 btn-neutro excluir-btn" data-id="">Excluir</button>
+        </div>
+    </li>
+</ul>
+
+    </div> 
+        
+        
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -487,10 +544,15 @@
 
         cadastroForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+	cadastroForm.reset();
+	
+	
+            
 
             const fornecedor = document.getElementById('fornecedor').value;
             const vendedor = document.getElementById('vendedor').value;
             const telefone = document.getElementById('telefone').value;
+            
 
             if (editingItemId) {
                 await db.collection('fornecedores').doc(editingItemId).update({
@@ -584,26 +646,37 @@ dropdownButton.addEventListener('click', () => {
             excluirButtons.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const id = e.target.getAttribute('data-id');
-                    db.collection('fornecedores').doc(id).delete();
+                    var resposta = confirm("Deseja realmente excluir?");
+    
+      if (resposta) {
+        // O usuário clicou em "OK", então execute a ação de exclusão aqui
+        console.log("Item deletado!");
+        db.collection('fornecedores').doc(id).delete();
+    } else {
+        // O usuário clicou em "Cancelar" ou fechou a caixa de diálogo, não fazemos nada
+        console.log("Exclusão cancelada.");
+        
+    }
+    
+    
+    const dropdown = btn.closest('.dropdown');
+    const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+    dropdownToggle.click();
                     
-                    const dropdown = btn.closest('.dropdown');
-                    const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
-                    dropdownToggle.click();
-                    
-                });
-            });
+    });
+});
             
-            // Função para cadastrar ou editar uma conta a pagar
-contasPagarForm.addEventListener('submit', async (e) => {
+            contasPagarForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+
 
     const fornecedorId = fornecedorSelect.value;
     const codigo = codigoBarras.value;
     const vencimento = dataVencimento.value;
     const valorConta = parseFloat(valor.value);
     const pagamento = dataPagamento.value;
-
-    // Verificar se já existe uma conta com o mesmo código de barras
+   
+// Verificar se já existe uma conta com o mesmo código de barras
     const existingConta = await db.collection('contasPagar').where('codigo', '==', codigo).get();
 
     if (existingConta.size > 0 && !editingItemIdConta) {
@@ -611,7 +684,8 @@ contasPagarForm.addEventListener('submit', async (e) => {
         return;
     }
 
-    if (editingItemIdConta) {
+    
+if (editingItemIdConta) {
         await db.collection('contasPagar').doc(editingItemIdConta).update({
             fornecedorId,
             codigo,
@@ -623,6 +697,7 @@ contasPagarForm.addEventListener('submit', async (e) => {
         cadastrarContaBtn.textContent = "Cadastrar Conta";
         editingItemIdConta = null;
 
+        
         $('#contasPagarModal').modal('hide');
     } else {
         await db.collection('contasPagar').add({
@@ -640,8 +715,6 @@ contasPagarForm.addEventListener('submit', async (e) => {
 
             
         });
-        
-        
         
         
         db.collection('contasPagar').onSnapshot(snapshot => {
@@ -718,10 +791,11 @@ contasPagarForm.addEventListener('submit', async (e) => {
     const excluirBtn = listItem.querySelector('.excluir-conta-btn');
     excluirBtn.addEventListener('click', () => {
         const contaId = excluirBtn.getAttribute('data-id');
-        alert('Desjea realmente excluir?');
-        return;
+        dropdownMenu.classList.toggle('show');
+       
         // Lógica para confirmar a exclusão da conta com o ID e excluir
         console.log(`Excluir conta com ID ${contaId}`);
+        
     });
         
     });
@@ -747,9 +821,21 @@ contasPagarForm.addEventListener('submit', async (e) => {
     });
 
     excluirContaButtons.forEach(btn => {
-        btn.addEventListener('click', async (e) => {
+    btn.addEventListener('click', async (e) => {
             const id = e.target.getAttribute('data-id');
-            await db.collection('contasPagar').doc(id).delete();
+            var resposta = confirm("Deseja realmente excluir?");
+    
+      if (resposta) {
+        // O usuário clicou em "OK", então execute a ação de exclusão aqui
+        // Por exemplo: deletarItem();
+        await db.collection('contasPagar').doc(id).delete();
+        console.log("Item deletado!");
+    } else {
+        // O usuário clicou em "Cancelar" ou fechou a caixa de diálogo, não fazemos nada
+        console.log("Exclusão cancelada.");
+        
+    }
+           
         });
     });
     
@@ -865,6 +951,20 @@ document.getElementById('filtroFornecedores').addEventListener('input', filtrarF
         dataPagamentoFinal.value = '';
         
     }
+   
+            function exibirFormulario(formId) {
+            var form1 = document.getElementById('contas-pagar-form');
+            var form2 = document.getElementById('fornecedor-form');
+
+            if (formId === 'form1') {
+                form1.style.display = 'block';
+                form2.style.display = 'none';
+            } else if (formId === 'form2') {
+                form1.style.display = 'none';
+                form2.style.display = 'block';
+            }
+        }
+       
 
 
 // Selecionar os elementos de input para as datas de vencimento e pagamento
