@@ -7,6 +7,7 @@
     
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
     
@@ -29,7 +30,7 @@
             
             justify-content: center;
             flex-wrap: wrap;
-            
+            margin-bottom: 5px;
             margin-top: 5px;
             margin-right: 5px;
             margin-left: 5px;
@@ -66,6 +67,7 @@
             margin-bottom: 2px; /* Espaço entre os cards quando estão em linha */
             margin-right: -13px; /* Espaço horizontal entre os cards */
             margin-left: -12px; /* Espaço horizontal entre os cards */
+            margin-top: 45px;
             text-align: center; /* Centralizar o texto */
             border-radius: 4px;
            
@@ -80,6 +82,7 @@
             margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
             margin-right: -13px; /* Espaço horizontal entre os cards */
             margin-left: -12px; /* Espaço horizontal entre os cards */
+            margin-top: 45px;
             text-align: center; /* Centralizar o texto */
             border-radius: 4px;
         }
@@ -92,6 +95,7 @@
             margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
             margin-right: -13px; /* Espaço horizontal entre os cards */
             margin-left: -12px; /* Espaço horizontal entre os cards */
+            margin-top: 45px;
             text-align: center; /* Centralizar o texto */
             border-radius: 4px;
         }
@@ -101,7 +105,7 @@
             border: 10px; /* Remover borda */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             height: 62px;
-            margin-bottom: 2px; /* Espaço entre os cards quando estão em linha */
+            margin-bottom: -20px; /* Espaço entre os cards quando estão em linha */
             margin-right: -13px; /* Espaço horizontal entre os cards */
             margin-left: -12px; /* Espaço horizontal entre os cards */
             text-align: center; /* Centralizar o texto */
@@ -113,7 +117,7 @@
             border: 10px; /* Remover borda */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             height: 62px;
-            margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
+            margin-bottom: -20px; /* Espaço entre os cards quando estão em linha */
             margin-right: -13px; /* Espaço horizontal entre os cards */
             margin-left: -12px; /* Espaço horizontal entre os cards */
             text-align: center; /* Centralizar o texto */
@@ -125,7 +129,7 @@
             border: 10px; /* Remover borda */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             height: 62px;
-            margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
+            margin-bottom: -20px; /* Espaço entre os cards quando estão em linha */
             margin-right: -13px; /* Espaço horizontal entre os cards */
             margin-left: -12px; /* Espaço horizontal entre os cards */
             text-align: center; /* Centralizar o texto */
@@ -184,7 +188,10 @@
         margin-top: -50px; /* Ajustar o espaçamento superior para subir mais os botões */
         margin-bottom: 25px;
         }
-
+        .mt-5 {
+        top: -50px; /* Ajustar o espaçamento superior para subir mais os botões */
+        margin-bottom: 0px;
+        }
         
         
         /* Espaçamento entre os botões no dropdown */
@@ -229,7 +236,10 @@
         
         }
         .navbar {
-           background-color: blue; /* Cor de fundo azul */
+         position: fixed;
+         top: 0;
+         width: 100%;
+         z-index: 1000; /* Coloca o Elemento na frente */
         }
         
         .navbar-brand {
@@ -238,8 +248,10 @@
             align-items: center;
             font-size: 22px;
             font-weight: 700;
+            margin-left: 1%;
+            margin-left: 1%;
             font-family: 'Roboto', sans-serif;
-            color: white; /* Cor do texto "Sistema de Controle" */
+            
             
         }
 
@@ -271,11 +283,8 @@
 </head>
 <body>
     
-    
-    
-    
-    
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+ 
+	<nav class="navbar navbar navbar-light bg-light">
             <b class="navbar-brand" href="#">CONTROLE DE BOLETOS</b>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -301,7 +310,7 @@
     <div class="col-4">
         <div class="card-1">
             <div class="card-body">
-                <h6 class="card-title">Atrasados</h6>
+                <h6 class="card-title"><i class="fas fa-exclamation-circle"></i> Atrasados</h6>
                 <p class="card-text" id="contasVencidasCount">Carregando...</p>
             </div>
             
@@ -310,7 +319,7 @@
     <div class="col-4">
         <div class="card-2">
             <div class="card-body">
-                <h6 class="card-title">Hoje</h6>
+                <h6 class="card-title"><i class="fas fa-calendar-day"></i> Hoje</h6>
                 <p class="card-text" id="contasHojeCount">Carregando...</p>
             </div>
         </div>
@@ -318,7 +327,7 @@
     <div class="col-4">
     <div class="card-3">
         <div class="card-body">
-            <h6 class="card-title">Amanhã</h6>
+            <h6 class="card-title"><i class="fas fa-calendar-plus"></i> Amanhã</h6>
             <p class="card-text" id="contasAmanhaCount">Carregando...</p>
         </div>
     </div>
@@ -326,7 +335,7 @@
     <div class="col-4">
         <div class="card-4">
             <div class="card-body">
-                <h6 class="card-title">No prazo</h6>
+                <h6 class="card-title"><i class="fas fa-calendar-check"></i> No prazo</h6>
                 <p class="card-text" id="contasAVencerCount">Carregando...</p>
             </div>
         </div>
@@ -334,7 +343,7 @@
     <div class="col-4">
     <div class="card-5">
         <div class="card-body">
-            <h6 class="card-title">Pagos</h6>
+            <h6 class="card-title"><i class="fas fa-check-circle"></i> Pagos</h6>
             <p class="card-text" id="contasPagasCount">Carregando...</p>
         </div>
     </div>
@@ -343,7 +352,7 @@
     <div class="col-4">
         <div class="card-6">
             <div class="card-body">
-                <h6 class="card-title">Total</h6>
+                <h6 class="card-title"><i class="fas fa-dollar-sign"></i> Total</h6>
                 <p class="card-text" id="totalContasCount">Carregando...</p>
             </div>
         </div>
@@ -399,6 +408,12 @@
             
   <h2 class="mt-5">BOLETOS</h2> 
 <div id="filtro-contas-pagar" class="form-container">
+<div class="form-containerB">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contasPagarModal" style="margin: 15px;">
+            ✚
+        </button>
+            <input type="text" class="form-control" id="filtroFornecedorContas" placeholder="Digite o nome do fornecedor" oninput="filtrarContasPorFornecedor()">
+        </div>
     <div class="form-group-3">
         <div class="row">
             <div class="col-6">
@@ -427,13 +442,6 @@
             <button type="button" class="btn btn-primary" id="filtrarContasBtn">Filtrar Contas</button>
         </div>
         
-        
-            <div class="form-containerB">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contasPagarModal" style="margin: 15px;">
-            ✚
-        </button>
-            <input type="text" class="form-control" id="filtroFornecedorContas" placeholder="Digite o nome do fornecedor" oninput="filtrarContasPorFornecedor()">
-        </div>
         
         
         <ul id="contasPagarList" class="list-group">
@@ -544,11 +552,7 @@
 
         cadastroForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-	cadastroForm.reset();
 	
-	
-            
-
             const fornecedor = document.getElementById('fornecedor').value;
             const vendedor = document.getElementById('vendedor').value;
             const telefone = document.getElementById('telefone').value;
@@ -943,6 +947,10 @@ document.getElementById('filtroFornecedores').addEventListener('input', filtrarF
 
 });
 
+    function fecharMenu() {
+            document.querySelector('.navbar-toggler').click(); // Simula o clique no botão do menu
+        }
+
 // Função para limpar os campos de data
     function limparCampos() {
         dataVencimentoInicial.value = '';
@@ -959,9 +967,13 @@ document.getElementById('filtroFornecedores').addEventListener('input', filtrarF
             if (formId === 'form1') {
                 form1.style.display = 'block';
                 form2.style.display = 'none';
+		fecharMenu()
+                
             } else if (formId === 'form2') {
                 form1.style.display = 'none';
                 form2.style.display = 'block';
+		fecharMenu()
+                
             }
         }
        
