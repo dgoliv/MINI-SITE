@@ -20,7 +20,7 @@
     /* Seletor universal para aplicar a fonte a todos os elementos de texto */
     * {
         font-family: 'Roboto', sans-serif;
-        font-size: 12px;
+        font-size: 13px;
     }
     
     
@@ -235,12 +235,24 @@
         margin-left: -16px;
         
         }
+        
+        .fornecedorT {
+        margin-top: 65px;
+
+        }
+        
+        .boletosT {
+        margin-top: 0px;
+
+        }
+        
         .navbar {
          position: fixed;
          top: 0;
          width: 100%;
          z-index: 1000; /* Coloca o Elemento na frente */
         }
+        
         
         .navbar-brand {
             text-align: center;
@@ -251,13 +263,10 @@
             margin-left: 1%;
             margin-left: 1%;
             font-family: 'Roboto', sans-serif;
-            
-            
+         
         }
 
-      
-        
-       
+     
         /* Estilo para centralizar os nomes dos menus */
         .navbar-nav .nav-link {
             text-align: center;
@@ -302,8 +311,10 @@
         </nav>
 
   
-       <div class="container md-3"> <!-- FORMULÁRIO GERAL -->  
-    <div id="cards-container" class="form-container"> <!-- FORMULÁRIO DOS CARDS -->
+       <div class="container md-3"> <!-- FORMULÁRIO GERAL -->
+ 			<!-- BOLETOS -->
+        <div id="contas-pagar-form" class="form-containerF"> 
+        <div id="cards-container" class="form-container"> <!-- FORMULÁRIO DOS CARDS -->
     
         <p class="mt-6 mb-3"></p>
         <div class="row mt-6">
@@ -359,10 +370,6 @@
     </div>
 </div>
 
-
-
-                     <!-- BOLETOS -->
-        <div id="contas-pagar-form" class="form-container">
         <!-- Modal do Formulário de Cadastro de Contas a Pagar -->
         <div class="modal fade" id="contasPagarModal" tabindex="-1" role="dialog" aria-labelledby="contasPagarModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -405,8 +412,9 @@
 </div>
 </div>
 
-            
-  <h2 class="mt-5">BOLETOS</h2> 
+  <div class="boletosT">          
+  <h2 class="mt-5">BOLETOS</h2>
+  </div>
 <div id="filtro-contas-pagar" class="form-container">
 <div class="form-containerB">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contasPagarModal" style="margin: 15px;">
@@ -447,7 +455,7 @@
         <ul id="contasPagarList" class="list-group">
             <!-- Lista de contas a pagar será exibida aqui -->
         </ul>
- 
+</div> 
 </div>
 </div>
 </div>
@@ -488,9 +496,9 @@
 
        
 
-        
+        <div class="fornecedorT">
         <h2 class="mt-5">FORNECEDORES</h2>
-
+        </div>
         <div class="form-containerB">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastroModal" style="margin: 15px;">✚</button>
     <input type="text" class="form-control" id="filtroFornecedores" placeholder="Digite o nome do fornecedor" oninput="filtrarFornecedores()">
@@ -959,6 +967,15 @@ document.getElementById('filtroFornecedores').addEventListener('input', filtrarF
         dataPagamentoFinal.value = '';
         
     }
+    window.onload = function() {
+        var form1 = document.getElementById('contas-pagar-form');
+            var form2 = document.getElementById('fornecedor-form');
+
+                form1.style.display = 'block';
+                form2.style.display = 'none';
+    
+            } 
+    
    
             function exibirFormulario(formId) {
             var form1 = document.getElementById('contas-pagar-form');
@@ -977,7 +994,10 @@ document.getElementById('filtroFornecedores').addEventListener('input', filtrarF
             }
         }
        
+var botao = document.getElementById('meuBotao');
 
+    // Associe a função ao evento onclick do botão
+    botao.onclick = minhaFuncao;
 
 // Selecionar os elementos de input para as datas de vencimento e pagamento
 const dataVencimentoInicial = document.getElementById('dataVencimentoInicial');
@@ -1020,6 +1040,7 @@ filtrarContasBtn.addEventListener('click', () => {
 
 // Adicionar evento de clique para o botão de filtragem
 filtrarContasBtn.addEventListener('click', filtrarContas);
+
 
         
    </script>
