@@ -250,10 +250,12 @@
             margin-left: 1%;
             margin-left: 1%;
             font-family: 'Roboto', sans-serif;
-            
-            
+ 
         }
-      
+        .fornecedorT {
+        margin-top: 65px;
+
+        }
         
        
         /* Estilo para centralizar os nomes dos menus */
@@ -319,9 +321,12 @@
                 </ul>
             </div>
         </nav>
+
   
-       <div class="container md-3"> <!-- FORMULÁRIO GERAL -->  
-    <div id="cards-container" class="form-container"> <!-- FORMULÁRIO DOS CARDS -->
+       <div class="container md-3"> <!-- FORMULÁRIO GERAL -->
+ 			<!-- BOLETOS -->
+        <div id="contas-pagar-form" class="form-containerF"> 
+        <div id="cards-container" class="form-container"> <!-- FORMULÁRIO DOS CARDS -->
     
         <p class="mt-6 mb-3"></p>
         <div class="row mt-6">
@@ -366,6 +371,7 @@
         </div>
     </div>
 </div>
+
     <div class="col-4">
         <div class="card-6">
             <div class="card-body">
@@ -375,8 +381,7 @@
         </div>
     </div>
 </div>
-                     <!-- BOLETOS -->
-        <div id="contas-pagar-form" class="form-container">
+
         <!-- Modal do Formulário de Cadastro de Contas a Pagar -->
         <div class="modal fade" id="contasPagarModal" tabindex="-1" role="dialog" aria-labelledby="contasPagarModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -418,8 +423,10 @@
     </div>
 </div>
 </div>
-            
-  <h2 class="mt-5">BOLETOS</h2> 
+
+  <div class="boletosT">          
+  <h2 class="mt-5">BOLETOS</h2>
+  </div>
 <div id="filtro-contas-pagar" class="form-container">
 <div class="form-containerB">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contasPagarModal" style="margin: 15px;">
@@ -430,25 +437,26 @@
     <div class="form-group-3">
         <div class="row">
             <div class="col-6">
-                <label for="dataVencimentoInicial" class="small">Vencimento Inicial</label>
+                <label for="dataVencimentoInicial" class="small">Data de Vencimento Inicial:</label>
                 <input type="date" class="form-control" id="dataVencimentoInicial">
             </div>
             <div class="col-6">
-                <label for="dataVencimentoFinal" class="small">Vencimento Final</label>
+                <label for="dataVencimentoFinal" class="small">Data de Vencimento Final:</label>
                 <input type="date" class="form-control" id="dataVencimentoFinal">
             </div>
         </div>
         
         <div class="row">
             <div class="col-6">
-                <label for="dataPagamentoInicial" class="small">Pagamento Inicial</label>
+                <label for="dataPagamentoInicial" class="small">Data de Pagamento Inicial:</label>
                 <input type="date" class="form-control" id="dataPagamentoInicial">
             </div>
             <div class="col-6">
-                <label for="dataPagamentoFinal" class="small">Pagamento Final</label>
+                <label for="dataPagamentoFinal" class="small">Data de Pagamento Final:</label>
                 <input type="date" class="form-control" id="dataPagamentoFinal">
             </div>
         </div>
+
         <div class="text-right mt-2"> <!-- Alinha o botão ao lado direito -->
             <button id="limparCamposButton" class="btn btn-primary" onclick="limparCampos()" >Limpar</button>
             <button type="button" class="btn btn-primary" id="filtrarContasBtn">Filtrar Contas</button>
@@ -459,13 +467,14 @@
         <ul id="contasPagarList" class="list-group">
             <!-- Lista de contas a pagar será exibida aqui -->
         </ul>
- 
+</div> 
 </div>
 </div>
 </div>
 <div
 <!-- Formulário de Cadastro de Fornecedores -->
         <div id="fornecedor-form" class="form-container">
+
 <!-- Modal do Formulário de Cadastro de Fornecedores -->
 <div class="modal fade" id="cadastroModal" tabindex="-1" role="dialog" aria-labelledby="cadastroModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -496,13 +505,17 @@
         </div>
     </div>
 </div>
+
        
-        
+
+        <div class="fornecedorT">
         <h2 class="mt-5">FORNECEDORES</h2>
+        </div>
         <div class="form-containerB">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastroModal" style="margin: 15px;">✚</button>
     <input type="text" class="form-control" id="filtroFornecedores" placeholder="Digite o nome do fornecedor" oninput="filtrarFornecedores()">
 </div>
+
  
     <div
         <ul id="fornecedoresList" class="list-group">
@@ -519,6 +532,7 @@
         </div>
     </li>
 </ul>
+
     </div> 
         
         
