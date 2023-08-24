@@ -754,7 +754,8 @@ if (editingItemIdConta) {
         <div class="itens-dlist">
             <strong>Fornecedor:</strong>
             <strong class="nome-fornecedor">${data.fornecedorId}</strong><br>
-            <strong>Código de Barras:</strong> ${data.codigo}<br>
+            <strong>Código de Barras:</strong> ${data.codigo}
+            <i class="far fa-copy ml-2" style="cursor: pointer;" onclick="copyDescription('${data.codigo}')"></i><br>
             <strong>Data de Vencimento:</strong> ${dataVencimentoFormatada}<br>
             <strong>Valor:</strong> R$ 
             <class="item-valor">${data.valor.toFixed(2)}<br>
@@ -967,6 +968,19 @@ document.getElementById('filtroFornecedores').addEventListener('input', filtrarF
         dataPagamentoFinal.value = '';
         
     }
+    
+    function copyDescription(descricao) {
+      const textarea = document.createElement('textarea');
+      textarea.value = descricao;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    
+      alert('Código de barras copiado!');
+    }
+
+    
     window.onload = function() {
         var form1 = document.getElementById('contas-pagar-form');
             var form2 = document.getElementById('fornecedor-form');
