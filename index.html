@@ -9,18 +9,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-
     
     <style>
     
         body {
         font-family: 'Roboto', sans-serif;
     }
-
     /* Seletor universal para aplicar a fonte a todos os elementos de texto */
     * {
         font-family: 'Roboto', sans-serif;
-        font-size: 13px;
+        font-size: 12px;
     }
     
     
@@ -52,11 +50,13 @@
             font-size: 13px;
             font-family: 'Roboto', sans-serif;
             text-align: center; /* Centralizar o texto */
+            margin-top: -6px;
+
             margin-top: -5px;
             margin-bottom: -10px;
-           
+
         }
-        
+
          /* Estilos para os cards */
         .card-1 {
             background-color: #e87d7d; /* Vermelho claro */
@@ -86,7 +86,6 @@
             text-align: center; /* Centralizar o texto */
             border-radius: 4px;
         }
-
         .card-3 {
             background-color: #edcb82; /* Amarelo claro */
             border: 5px; /* Remover borda */
@@ -99,7 +98,6 @@
             text-align: center; /* Centralizar o texto */
             border-radius: 4px;
         }
-
         .card-4 {
             background-color: #8adb99; /* Azul claro */
             border: 10px; /* Remover borda */
@@ -111,7 +109,6 @@
             text-align: center; /* Centralizar o texto */
             border-radius: 4px;
         }
-
         .card-5 {
             background-color: #84b6f4; /* Azul claro mais claro */
             border: 10px; /* Remover borda */
@@ -161,6 +158,8 @@
             font-family: 'Roboto', sans-serif;
             color: #323232;
             font-weight: bold;
+            margin-top: 0px;
+            margin-bottom: 1px;
             margin-top: -5px;
             margin-bottom: 10px;
             margin-right: -17px; /* Espaço horizontal entre os cards */
@@ -235,24 +234,12 @@
         margin-left: -16px;
         
         }
-        
-        .fornecedorT {
-        margin-top: 65px;
-
-        }
-        
-        .boletosT {
-        margin-top: 0px;
-
-        }
-        
         .navbar {
          position: fixed;
          top: 0;
          width: 100%;
          z-index: 1000; /* Coloca o Elemento na frente */
         }
-        
         
         .navbar-brand {
             text-align: center;
@@ -263,10 +250,12 @@
             margin-left: 1%;
             margin-left: 1%;
             font-family: 'Roboto', sans-serif;
-         
+            
+            
         }
-
-     
+      
+        
+       
         /* Estilo para centralizar os nomes dos menus */
         .navbar-nav .nav-link {
             text-align: center;
@@ -275,14 +264,35 @@
         
        
         .navbar-toggler {
-         margin-top: -42px; /* Ajustar o espaçamento superior para subir mais os botões */
+        margin-top: -42px; /* Ajustar o espaçamento superior para subir mais os botões */
         margin-bottom: 0px;
         margin-right: 0px;
         margin-left: 90%;
+  
+        }
+        .small {
+        font-size: 11px;
+        margin-top: 0px; /* Ajustar o espaçamento superior para subir mais os botões */
+        margin-bottom: 0px;
+        margin-right: 0px;
+        margin-left: 2%;
+  
+        }
+        .form-group-3 {
+        margin-top: -20px; /* Ajustar o espaçamento superior para subir mais os botões */
+        margin-bottom: 0px;
+        margin-right: 0px;
+        margin-left: 0%;
+  
+        }
         
-        
-            
-            
+        /* Estilo para o alerta */
+        .custom-alert {
+          position: fixed;
+          top: 80%; /* Ajuste a posição vertical conforme necessário */
+          left: 18%; /* Ajuste a posição horizontal conforme necessário */
+          width: 65%; /* Ajuste a largura do alerta conforme necessário */
+          text-align: center; /* Centraliza o texto do alerta */
         }
       
         
@@ -309,12 +319,9 @@
                 </ul>
             </div>
         </nav>
-
   
-       <div class="container md-3"> <!-- FORMULÁRIO GERAL -->
- 			<!-- BOLETOS -->
-        <div id="contas-pagar-form" class="form-containerF"> 
-        <div id="cards-container" class="form-container"> <!-- FORMULÁRIO DOS CARDS -->
+       <div class="container md-3"> <!-- FORMULÁRIO GERAL -->  
+    <div id="cards-container" class="form-container"> <!-- FORMULÁRIO DOS CARDS -->
     
         <p class="mt-6 mb-3"></p>
         <div class="row mt-6">
@@ -359,7 +366,6 @@
         </div>
     </div>
 </div>
-
     <div class="col-4">
         <div class="card-6">
             <div class="card-body">
@@ -369,7 +375,8 @@
         </div>
     </div>
 </div>
-
+                     <!-- BOLETOS -->
+        <div id="contas-pagar-form" class="form-container">
         <!-- Modal do Formulário de Cadastro de Contas a Pagar -->
         <div class="modal fade" id="contasPagarModal" tabindex="-1" role="dialog" aria-labelledby="contasPagarModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -411,10 +418,8 @@
     </div>
 </div>
 </div>
-
-  <div class="boletosT">          
-  <h2 class="mt-5">BOLETOS</h2>
-  </div>
+            
+  <h2 class="mt-5">BOLETOS</h2> 
 <div id="filtro-contas-pagar" class="form-container">
 <div class="form-containerB">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contasPagarModal" style="margin: 15px;">
@@ -425,26 +430,25 @@
     <div class="form-group-3">
         <div class="row">
             <div class="col-6">
-                <label for="dataVencimentoInicial" class="small">Data de Vencimento Inicial:</label>
+                <label for="dataVencimentoInicial" class="small">Vencimento Inicial</label>
                 <input type="date" class="form-control" id="dataVencimentoInicial">
             </div>
             <div class="col-6">
-                <label for="dataVencimentoFinal" class="small">Data de Vencimento Final:</label>
+                <label for="dataVencimentoFinal" class="small">Vencimento Final</label>
                 <input type="date" class="form-control" id="dataVencimentoFinal">
             </div>
         </div>
         
         <div class="row">
             <div class="col-6">
-                <label for="dataPagamentoInicial" class="small">Data de Pagamento Inicial:</label>
+                <label for="dataPagamentoInicial" class="small">Pagamento Inicial</label>
                 <input type="date" class="form-control" id="dataPagamentoInicial">
             </div>
             <div class="col-6">
-                <label for="dataPagamentoFinal" class="small">Data de Pagamento Final:</label>
+                <label for="dataPagamentoFinal" class="small">Pagamento Final</label>
                 <input type="date" class="form-control" id="dataPagamentoFinal">
             </div>
         </div>
-
         <div class="text-right mt-2"> <!-- Alinha o botão ao lado direito -->
             <button id="limparCamposButton" class="btn btn-primary" onclick="limparCampos()" >Limpar</button>
             <button type="button" class="btn btn-primary" id="filtrarContasBtn">Filtrar Contas</button>
@@ -455,14 +459,13 @@
         <ul id="contasPagarList" class="list-group">
             <!-- Lista de contas a pagar será exibida aqui -->
         </ul>
-</div> 
+ 
 </div>
 </div>
 </div>
 <div
 <!-- Formulário de Cadastro de Fornecedores -->
         <div id="fornecedor-form" class="form-container">
-
 <!-- Modal do Formulário de Cadastro de Fornecedores -->
 <div class="modal fade" id="cadastroModal" tabindex="-1" role="dialog" aria-labelledby="cadastroModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -493,17 +496,13 @@
         </div>
     </div>
 </div>
-
        
-
-        <div class="fornecedorT">
+        
         <h2 class="mt-5">FORNECEDORES</h2>
-        </div>
         <div class="form-containerB">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastroModal" style="margin: 15px;">✚</button>
     <input type="text" class="form-control" id="filtroFornecedores" placeholder="Digite o nome do fornecedor" oninput="filtrarFornecedores()">
 </div>
-
  
     <div
         <ul id="fornecedoresList" class="list-group">
@@ -520,11 +519,9 @@
         </div>
     </li>
 </ul>
-
     </div> 
         
         
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -540,9 +537,7 @@
         messagingSenderId: "341899111399",
         appId: "1:341899111399:web:3c5edd575a96808c786b42"
         };
-
         firebase.initializeApp(firebaseConfig);
-
         const db = firebase.firestore();
         const cadastroForm = document.getElementById('cadastroForm');
         const fornecedoresList = document.getElementById('fornecedoresList');
@@ -557,7 +552,6 @@
     const dataPagamento = document.getElementById('dataPagamento');
     const cadastrarContaBtn = document.querySelector('#contasPagarForm button[type="submit"]');
     let editingItemIdConta = null;
-
         cadastroForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 	
@@ -565,14 +559,12 @@
             const vendedor = document.getElementById('vendedor').value;
             const telefone = document.getElementById('telefone').value;
             
-
             if (editingItemId) {
                 await db.collection('fornecedores').doc(editingItemId).update({
                     fornecedor,
                     vendedor,
                     telefone
                 });
-
                 cadastrarBtn.textContent = "Cadastrar Fornecedor";
                 editingItemId = null;
             } else {
@@ -582,12 +574,9 @@
                     telefone
                 });
             }
-
             cadastroForm.reset();
             $('#cadastroModal').modal('hide'); // Fechar o modal após cadastrar ou editar
-
         });
-
         db.collection('fornecedores').onSnapshot(snapshot => {
         fornecedorSelect.innerHTML = ''; // Limpa a lista suspensa antes de adicionar novos itens
         fornecedoresList.innerHTML = '';
@@ -620,21 +609,17 @@
     </div>
     </div>
 `;
-
 // Adicionar evento de clique para abrir o dropdown ao clicar no botão "Ações"
 const dropdownButton = listItem.querySelector(`#editarExcluirDropdown_${doc.id}`);
 const dropdownMenu = listItem.querySelector(`#editarExcluirDropdown_${doc.id} + .dropdown-menu`);
-
 dropdownButton.addEventListener('click', () => {
     dropdownMenu.classList.toggle('show');
 });
                 
                 fornecedoresList.appendChild(listItem);
             });
-
             const editarButtons = document.querySelectorAll('.editar-btn');
             const excluirButtons = document.querySelectorAll('.excluir-btn');
-
             editarButtons.forEach(btn => {
                 btn.addEventListener('click', async (e) => {
                     const id = e.target.getAttribute('data-id');
@@ -654,7 +639,6 @@ dropdownButton.addEventListener('click', () => {
                     $('#cadastroModal').modal('show');
                 });
             });
-
             excluirButtons.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const id = e.target.getAttribute('data-id');
@@ -680,8 +664,6 @@ dropdownButton.addEventListener('click', () => {
             
             contasPagarForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-
-
     const fornecedorId = fornecedorSelect.value;
     const codigo = codigoBarras.value;
     const vencimento = dataVencimento.value;
@@ -690,12 +672,10 @@ dropdownButton.addEventListener('click', () => {
    
 // Verificar se já existe uma conta com o mesmo código de barras
     const existingConta = await db.collection('contasPagar').where('codigo', '==', codigo).get();
-
     if (existingConta.size > 0 && !editingItemIdConta) {
         alert('Já existe uma conta com o mesmo código de barras. Por favor, verifique o código e tente novamente.');
         return;
     }
-
     
 if (editingItemIdConta) {
         await db.collection('contasPagar').doc(editingItemIdConta).update({
@@ -705,10 +685,8 @@ if (editingItemIdConta) {
             valor: valorConta,
             pagamento
         });
-
         cadastrarContaBtn.textContent = "Cadastrar Conta";
         editingItemIdConta = null;
-
         
         $('#contasPagarModal').modal('hide');
     } else {
@@ -720,11 +698,9 @@ if (editingItemIdConta) {
             pagamento
         });
     }
-
     contasPagarForm.reset();
     $('#contasPagarModal').modal('hide');
 });
-
             
         });
         
@@ -738,13 +714,11 @@ if (editingItemIdConta) {
             month: '2-digit',
             year: 'numeric'
         });
-
         const dataPagamentoFormatada = data.pagamento ? new Date(data.pagamento + 'T00:00:00').toLocaleDateString('pt-BR', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric'
         }) : 'Não pago';
-
         const listItem = document.createElement('li');
         listItem.classList.add('list-group-item');
         listItem.setAttribute('data-vencimento', data.vencimento); // Adicionar o atributo data-vencimento
@@ -799,7 +773,6 @@ if (editingItemIdConta) {
         
         
     });
-
     // Adicionar evento de clique no botão "Excluir"
     const excluirBtn = listItem.querySelector('.excluir-conta-btn');
     excluirBtn.addEventListener('click', () => {
@@ -812,10 +785,8 @@ if (editingItemIdConta) {
     });
         
     });
-
    const editarContaButtons = document.querySelectorAll('.editar-conta-btn');
     const excluirContaButtons = document.querySelectorAll('.excluir-conta-btn');
-
     editarContaButtons.forEach(btn => {
         btn.addEventListener('click', async (e) => {
             const id = e.target.getAttribute('data-id');
@@ -832,7 +803,6 @@ if (editingItemIdConta) {
             
         });
     });
-
     excluirContaButtons.forEach(btn => {
     btn.addEventListener('click', async (e) => {
             const id = e.target.getAttribute('data-id');
@@ -862,7 +832,6 @@ function formatarData(data) {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     return new Intl.DateTimeFormat('pt-BR', options).format(data);
 }
-
 // Atualizar os cards no topo com informações sobre os valores das contas
 db.collection('contasPagar').onSnapshot(snapshot => {
     const hoje = new Date();
@@ -873,13 +842,11 @@ db.collection('contasPagar').onSnapshot(snapshot => {
     let totalContasAVencer = 0;
     let totalContasPagas = 0;
     let totalContasAmanha = 0; // Inicializar total para amanhã
-
     snapshot.docs.forEach(doc => {
             const data = doc.data();
             const dataVencimento = new Date(data.vencimento + 'T00:00:00');
             const valorConta = data.valor;
             const dataPagamento = data.pagamento ? new Date(data.pagamento + 'T00:00:00') : null;
-
             if (dataVencimento.toDateString() === hoje.toDateString()) {
                 if (!dataPagamento) {
                     totalContasHoje += valorConta;
@@ -897,26 +864,19 @@ db.collection('contasPagar').onSnapshot(snapshot => {
                 totalContasPagas += data.valor;
             }
         });
-
         const totalContas = totalContasVencidas + totalContasHoje + totalContasAmanha +totalContasAVencer + totalContasPagas;
-
         document.getElementById('contasVencidasCount').textContent = `R$ ${totalContasVencidas.toFixed(2)}`;
         document.getElementById('contasHojeCount').textContent = `R$ ${totalContasHoje.toFixed(2)}`;
         document.getElementById('contasAVencerCount').textContent = `R$ ${totalContasAVencer.toFixed(2)}`;
         document.getElementById('totalContasCount').textContent = `R$ ${totalContas.toFixed(2)}`;
         document.getElementById('contasPagasCount').textContent = `R$ ${totalContasPagas.toFixed(2)}`;
         document.getElementById('contasAmanhaCount').textContent = `R$ ${totalContasAmanha.toFixed(2)}`; // Exibir total para amanhã
-
-
     });
-
     function filtrarContasPorFornecedor() {
         const filtroInput = document.getElementById('filtroFornecedorContas');
         const contasPagarList = document.getElementById('contasPagarList');
         const contasItens = contasPagarList.getElementsByClassName('list-group-item');
-
         const filtro = filtroInput.value.toLowerCase();
-
         for (const item of contasItens) {
             const fornecedorNome = item.querySelector('.nome-fornecedor').textContent.toLowerCase();
             if (fornecedorNome.includes(filtro)) {
@@ -926,17 +886,12 @@ db.collection('contasPagar').onSnapshot(snapshot => {
             }
         }
     }
-
     document.getElementById('filtroFornecedorContas').addEventListener('input', filtrarContasPorFornecedor);
-
-
     function filtrarFornecedores() {
         const filtroInput = document.getElementById('filtroFornecedores');
         const fornecedoresList = document.getElementById('fornecedoresList');
         const fornecedoresItens = fornecedoresList.getElementsByClassName('list-group-item');
-
         const filtro = filtroInput.value.toLowerCase();
-
         for (const item of fornecedoresItens) {
             const fornecedorNome = item.querySelector('.fornecedor-nome').textContent.toLowerCase();
             if (fornecedorNome.includes(filtro)) {
@@ -946,20 +901,13 @@ db.collection('contasPagar').onSnapshot(snapshot => {
             }
         }
     }
-
-
 document.getElementById('filtroFornecedores').addEventListener('input', filtrarFornecedores);
-
     
     
-
-
 });
-
     function fecharMenu() {
             document.querySelector('.navbar-toggler').click(); // Simula o clique no botão do menu
         }
-
 // Função para limpar os campos de data
     function limparCampos() {
         dataVencimentoInicial.value = '';
@@ -970,18 +918,31 @@ document.getElementById('filtroFornecedores').addEventListener('input', filtrarF
     }
     
     function copyDescription(descricao) {
-      const textarea = document.createElement('textarea');
-      textarea.value = descricao;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-    
-      alert('Código de barras copiado!');
-    }
+  const textarea = document.createElement('textarea');
+  textarea.value = descricao;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+
+  const alertDiv = document.createElement('div');
+  alertDiv.className = 'alert alert-primary custom-alert';
+  alertDiv.role = 'alert';
+  alertDiv.textContent = 'Código de barras copiado!';
+
+  document.body.appendChild(alertDiv);
+
+  setTimeout(() => {
+    alertDiv.classList.add('fade');
+    alertDiv.classList.add('show');
+    setTimeout(() => {
+      document.body.removeChild(alertDiv);
+    }, 500); // Tempo de animação do fade (0.5s)
+  }, 2000); // Tempo que o alerta ficará visível (2s)
+}
 
     
-    window.onload = function() {
+        window.onload = function() {
         var form1 = document.getElementById('contas-pagar-form');
             var form2 = document.getElementById('fornecedor-form');
 
@@ -989,12 +950,10 @@ document.getElementById('filtroFornecedores').addEventListener('input', filtrarF
                 form2.style.display = 'none';
     
             } 
-    
    
             function exibirFormulario(formId) {
             var form1 = document.getElementById('contas-pagar-form');
             var form2 = document.getElementById('fornecedor-form');
-
             if (formId === 'form1') {
                 form1.style.display = 'block';
                 form2.style.display = 'none';
@@ -1008,42 +967,31 @@ document.getElementById('filtroFornecedores').addEventListener('input', filtrarF
             }
         }
        
-var botao = document.getElementById('meuBotao');
-
-    // Associe a função ao evento onclick do botão
-    botao.onclick = minhaFuncao;
-
 // Selecionar os elementos de input para as datas de vencimento e pagamento
 const dataVencimentoInicial = document.getElementById('dataVencimentoInicial');
 const dataVencimentoFinal = document.getElementById('dataVencimentoFinal');
 const dataPagamentoInicial = document.getElementById('dataPagamentoInicial');
 const dataPagamentoFinal = document.getElementById('dataPagamentoFinal');
 const filtrarContasBtn = document.getElementById('filtrarContasBtn');
-
 // Função para atualizar a lista de contas a pagar com base nos filtros de data
 filtrarContasBtn.addEventListener('click', () => {
     const contasPagarList = document.getElementById('contasPagarList');
     const contasItens = contasPagarList.getElementsByClassName('list-group-item');
-
     const filtroDataVencimentoInicial = dataVencimentoInicial.value ? new Date(dataVencimentoInicial.value) : null;
     const filtroDataVencimentoFinal = dataVencimentoFinal.value ? new Date(dataVencimentoFinal.value) : null;
     const filtroDataPagamentoInicial = dataPagamentoInicial.value ? new Date(dataPagamentoInicial.value) : null;
     const filtroDataPagamentoFinal = dataPagamentoFinal.value ? new Date(dataPagamentoFinal.value) : null;
-
     for (const item of contasItens) {
         const dataVencimento = new Date(item.getAttribute('data-vencimento'));
         const dataPagamento = new Date(item.getAttribute('data-pagamento'));
-
         const vencimentoDentroDoFiltro = (
             (!filtroDataVencimentoInicial || dataVencimento >= filtroDataVencimentoInicial) &&
             (!filtroDataVencimentoFinal || dataVencimento <= filtroDataVencimentoFinal)
         );
-
         const pagamentoDentroDoFiltro = (
             (!filtroDataPagamentoInicial || dataPagamento >= filtroDataPagamentoInicial) &&
             (!filtroDataPagamentoFinal || dataPagamento <= filtroDataPagamentoFinal)
         );
-
         if ((vencimentoDentroDoFiltro && pagamentoDentroDoFiltro) || (!filtroDataVencimentoInicial && !filtroDataVencimentoFinal && !filtroDataPagamentoInicial && !filtroDataPagamentoFinal)) {
             item.style.display = 'block';
         } else {
@@ -1051,11 +999,8 @@ filtrarContasBtn.addEventListener('click', () => {
         }
     }
 });
-
 // Adicionar evento de clique para o botão de filtragem
 filtrarContasBtn.addEventListener('click', filtrarContas);
-
-
         
    </script>
 </body>
