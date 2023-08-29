@@ -704,8 +704,10 @@ if (editingItemIdConta) {
         });
         cadastrarContaBtn.textContent = "Cadastrar Conta";
         editingItemIdConta = null;
-        
+        contasPagarForm.reset();
         $('#contasPagarModal').modal('hide');
+        simularCliqueNoBotaoFiltrar();
+       
     } else {
         await db.collection('contasPagar').add({
             fornecedorId,
@@ -713,12 +715,14 @@ if (editingItemIdConta) {
             vencimento,
             valor: valorConta,
             pagamento
+           
         });
         
+        exibirCaixaPergunta()
     }
     contasPagarForm.reset();
-    $('#contasPagarModal').modal('hide');
-    simularCliqueNoBotaoFiltrar()
+    simularCliqueNoBotaoFiltrar();
+    
 });
             
         });
@@ -821,6 +825,7 @@ if (editingItemIdConta) {
       
             
         });
+        
     });
     excluirContaButtons.forEach(btn => {
     btn.addEventListener('click', async (e) => {
@@ -924,6 +929,18 @@ document.getElementById('filtroFornecedores').addEventListener('input', filtrarF
     
     
 });
+    function exibirCaixaPergunta() {
+        var resposta = confirm("Deseja cadastrar uma nova conta?");
+        
+        if (resposta) {
+            $('#contasPagarModal').modal('show');
+        } else {
+            console.log("Operação cancelada.");
+            $('#contasPagarModal').modal('hide');
+        }
+    }
+   
+
     function fecharMenu() {
             document.querySelector('.navbar-toggler').click(); // Simula o clique no botão do menu
         }
